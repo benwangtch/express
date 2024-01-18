@@ -7,6 +7,7 @@ import House from "../components/house";
 
 function Home() {
   const [type, setType] = useState("building");
+
   const handleClick = (value) => {
     if (value === type) {
       return;

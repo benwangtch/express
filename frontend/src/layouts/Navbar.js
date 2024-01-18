@@ -17,7 +17,7 @@ export default function App() {
   return (
     <MDBNavbar expand="lg" light bgColor="light">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="/">Navbar</MDBNavbarBrand>
+        <MDBNavbarBrand href="/">Property Valuation System</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -31,9 +31,9 @@ export default function App() {
             <MDBNavbarItem>
               <MDBNavbarLink href="/">Home</MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
+            {/* <MDBNavbarItem>
               <MDBNavbarLink href="/about">About</MDBNavbarLink>
-            </MDBNavbarItem>
+            </MDBNavbarItem> */}
             <MDBNavbarItem>
               <MDBNavbarLink href="/result">Result</MDBNavbarLink>
             </MDBNavbarItem>

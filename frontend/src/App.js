@@ -16,7 +16,7 @@ function App() {
         <MDBContainer>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            {/* <Route path="/about" element={<About />} /> */}
             <Route path="/result" element={<Result />} />
           </Routes>
         </MDBContainer>

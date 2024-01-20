@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Navbar from "./layouts/Navbar";
 import Home from "./pages/Home";
 import Result from "./pages/Result";
+import Test from "./components/test";
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
         <MDBContainer>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/about" element={<About />} /> */}
             <Route path="/result" element={<Result />} />
+            <Route path="/test" element={<Test />} />
           </Routes>
         </MDBContainer>
       </Router>

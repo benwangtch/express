@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 
-function SimilarProperties({ onDataLoad }) {
+function SimilarProperties({ similarAddress }) {
   // const [data, setData] = useState({
   //   type: "Building",
   //   address: "台中市南區福田一街60號",
@@ -9,30 +9,11 @@ function SimilarProperties({ onDataLoad }) {
   //   mainBuildingArea: "3.4",
   // });
 
-  const header = ["Type", "Address", "House Age", "Main Building Area"];
+  const header = Object.keys(similarAddress[0]);
 
   // const dataValues = Object.values(data);
 
-  const buildings = [
-    {
-      type: "Building",
-      address: "台中市西區民生路100號",
-      houseAge: "15",
-      mainBuildingArea: "4.5",
-    },
-    {
-      type: "Building",
-      address: "台中市北區崇德路200號",
-      houseAge: "30",
-      mainBuildingArea: "5.0",
-    },
-  ];
-
-  useEffect(() => {
-    if (onDataLoad) {
-      onDataLoad(buildings);
-    }
-  }, [onDataLoad, buildings]);
+  const buildings = similarAddress;
 
   return (
     <MDBTable>

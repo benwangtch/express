@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBInput, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBRange } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 
 function House() {
@@ -22,7 +22,7 @@ function House() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/", { replace: true, state: { address: data.address } });
+    navigate("/result");
   };
 
   return (
@@ -49,6 +49,84 @@ function House() {
           />
         </MDBCol>
       </MDBRow>
+
+      <hr className="hr" />
+
+      <h5>Filter</h5>
+
+      <div className="mb-4">
+        <MDBRange defaultValue={0} min="0" max="50" step="0.5" id="houseage" label="House Age" />
+      </div>
+
+      <MDBRow className="mb-4">
+        <MDBCol>
+          <MDBInput type="number" id="mainBuildingArea" label="Main Building Area" onChange={handleInputChange} />
+        </MDBCol>
+        <MDBCol>
+          <MDBInput
+            type="number"
+            id="floorAreaRatio"
+            label="Floor Area Ratio"
+            onChange={handleInputChange}
+            value={data.floorAreaRatio}
+          />
+        </MDBCol>
+      </MDBRow>
+
+      <MDBRow className="mb-4">
+        <MDBCol>
+          <MDBInput
+            type="number"
+            id="landTransferArea"
+            label="Land Transfer Area"
+            onChange={handleInputChange}
+            value={data.landTransferArea}
+          />
+        </MDBCol>
+        <MDBCol>
+          <MDBInput
+            type="number"
+            id="buildingTransferArea"
+            label="Building Transfer Area"
+            onChange={handleInputChange}
+            value={data.buildingTransferArea}
+          />
+        </MDBCol>
+        <MDBCol>
+          <MDBInput
+            type="number"
+            id="populationDensity"
+            label="Population Density"
+            onChange={handleInputChange}
+            value={data.populationDensity}
+          />
+        </MDBCol>
+      </MDBRow>
+
+      <MDBRow className="mb-4">
+        <MDBCol>
+          <MDBInput
+            type="number"
+            id="totalFloors"
+            label="Total Floor"
+            onChange={handleInputChange}
+            value={data.totalFloors}
+          />
+        </MDBCol>
+        <MDBCol>
+          <MDBInput
+            type="number"
+            id="parkingArea"
+            label="Parking Area"
+            onChange={handleInputChange}
+            value={data.parkingArea}
+          />
+        </MDBCol>
+        <MDBCol>
+          <MDBInput type="number" id="n_c_1000" label="n_c_1000" onChange={handleInputChange} value={data.n_c_1000} />
+        </MDBCol>
+      </MDBRow>
+
       <MDBBtn type="submit" className="mb-4" block>
         Submit
       </MDBBtn>

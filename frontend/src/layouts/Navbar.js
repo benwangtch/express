@@ -15,9 +15,9 @@ export default function App() {
   const [openNav, setOpenNav] = useState(false);
 
   return (
-    <MDBNavbar expand="lg" light bgColor="light">
+    <MDBNavbar expand="lg" light bgColor="light" className="rounded-pill">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="/">Property Valuation System</MDBNavbarBrand>
+        <MDBNavbarBrand href="/">Navbar</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -31,9 +31,6 @@ export default function App() {
             <MDBNavbarItem>
               <MDBNavbarLink href="/">Home</MDBNavbarLink>
             </MDBNavbarItem>
-            {/* <MDBNavbarItem>
-              <MDBNavbarLink href="/about">About</MDBNavbarLink>
-            </MDBNavbarItem> */}
             <MDBNavbarItem>
               <MDBNavbarLink href="/result">Result</MDBNavbarLink>
             </MDBNavbarItem>

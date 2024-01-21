@@ -7,23 +7,23 @@ import House from "../components/house";
 
 function Home() {
   const [type, setType] = useState("building");
-
-  const [data, setData] = useState('');
+  // For testing
+  const [data, setData] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/test');
+        const response = await axios.get("/test");
         setData(response.data.message);
         console.log(JSON.stringify(response.data));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
-
+  // End of testing
   const handleClick = (value) => {
     if (value === type) {
       return;

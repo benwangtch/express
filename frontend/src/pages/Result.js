@@ -1,5 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 import Map from "../components/map";
 import SimilarProperties from "../components/similarProperties";
@@ -34,11 +34,27 @@ const similarAddress = [
 ];
 
 function Result() {
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/test");
+        setData(response.data.message);
+        console.log(JSON.stringify(response.data));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Map userAddress={userAddress} similarAddress={similarAddress} />
       <div style={{ margin: 20 }}>ValuationResult</div>
-      <ValuationResult userAddress={userAddress} />
+      <ValuationResult userAddress={data} />
       <div style={{ margin: 20 }}>SimilarProperties</div>
       <SimilarProperties similarAddress={similarAddress} />
     </>

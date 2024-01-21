@@ -2,21 +2,11 @@ import React from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 
 function SimilarProperties({ similarAddress }) {
-  // const [data, setData] = useState({
-  //   type: "Building",
-  //   address: "台中市南區福田一街60號",
-  //   houseAge: "25",
-  //   mainBuildingArea: "3.4",
-  // });
-
   const header = Object.keys(similarAddress[0]);
-
-  // const dataValues = Object.values(data);
-
   const buildings = similarAddress;
 
   return (
-    <MDBTable>
+    <MDBTable responsive>
       <MDBTableHead light>
         <tr>
           {header.map((title, index) => (

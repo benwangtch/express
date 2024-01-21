@@ -6,7 +6,7 @@ function ValuationResult({ userAddress }) {
   const dataValues = Object.values(userAddress);
 
   return (
-    <MDBTable>
+    <MDBTable responsive>
       <MDBTableHead light>
         <tr>
           {header.map((title, index) => (
@@ -17,7 +17,9 @@ function ValuationResult({ userAddress }) {
       <MDBTableBody>
         <tr>
           {dataValues.map((value, index) => (
-            <td key={index}>{value}</td>
+            <td key={index} style={{ whiteSpace: "nowrap" }}>
+              {value}
+            </td>
           ))}
         </tr>
       </MDBTableBody>

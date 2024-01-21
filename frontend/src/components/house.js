@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBRange } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 
+// var houseRenderFeatures = ['price_pin','addr', 'far', 'house_age', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'total_floor', '車位移轉總面積(坪)','population_density', '主建物面積', 'n_c_1000']
+// var houseRenderFeaturesEng = ['Unit Price', 'Address','Floor Area Ratio','House Age','Land Transfer Area', 'Building Transfer Area','Total Floor', 'Parking Area','Population Density', 'Main Building Area','n_c_1000']
+
 function House() {
   const [data, setData] = useState({
     type: "house",

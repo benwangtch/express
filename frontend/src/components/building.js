@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBRange } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slider";
 
 // var buildingRenderFeatures = ['price_pin','addr', 'house_age','主建物面積','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density','total_floor', '車位移轉總面積(坪)', 'n_c_1000']
 // var buildingRenderFeaturesEng  = ['Unit Price', 'Address', 'House Age','Main Building Area','Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area','Population Density','Total Floor', 'Parking Area','n_c_1000']
@@ -20,6 +21,8 @@ function Building() {
     n_c_1000: "",
   });
 
+  const [houseAgeRange, setHouseAgeRange] = useState([0, 100]);
+
   let navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -29,10 +32,30 @@ function Building() {
     });
   };
 
+  const handleChange = (newValue) => {
+    setHouseAgeRange(newValue);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/result");
   };
+
+  const Thumb = (props, state) => (
+    <div
+      {...props}
+      style={{
+        ...props.style,
+        height: "25px",
+        width: "25px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <span style={{ fontSize: "12px" }}>{state.valueNow}</span>
+    </div>
+  );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -49,8 +72,17 @@ function Building() {
       <hr className="hr" />
 
       <h5>Filter</h5>
+
       <div className="mb-4">
-        <MDBRange defaultValue={0} min="0" max="50" step="0.5" id="houseage" label="House Age" />
+        <Slider
+          className={"slider"}
+          value={houseAgeRange}
+          onChange={handleChange}
+          min={0}
+          max={100}
+          step={1}
+          renderThumb={Thumb}
+        />
       </div>
 
       <MDBRow className="mb-4">

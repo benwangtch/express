@@ -3,6 +3,12 @@
   "version": "7.1.0",
   "description": "template for mdb-react-ui-kit",
   "private": true,
+  "proxy": "http://localhost:5000",
+  "devServer": {
+    "allowedHosts": [
+      "localhost"
+    ]
+  },
   "dependencies": {
     "@react-google-maps/api": "^2.19.2",
     "axios": "^1.6.5",

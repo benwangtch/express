@@ -117,9 +117,11 @@ def getLatLong(inputData, api):
     Returns:
         inputData: Added the keys of converted coordinates.
     """
-    addr =inputData['addr']
-    res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={addr}&key={api[0]}')
+    address =inputData['address']
+    print(address)
+    res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api}')
     resJson = res.json()
+    print(resJson)
     resJson = resJson['results'][0]
     latlng = resJson['geometry']['location']
     # Save the lat,lng to inference data
@@ -208,8 +210,9 @@ def getGroupLatLon(data, api):
         data.loc[idx, 'lat'] = tmp[0]
         data.loc[idx, 'lon'] = tmp[1]
         
-        res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?latlng={tmp[0]}, {tmp[1]}&language=zh-TW&key={api[0]}')
+        res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?latlng={tmp[0]}, {tmp[1]}&language=zh-TW&key={api}')
         resJson = res.json()
+        
         resJson = resJson['results'][0]
         # addr of data
         addr = resJson['formatted_address'] 

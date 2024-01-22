@@ -19,6 +19,7 @@ function Building() {
     totalFloors: "",
     parkingArea: "",
     n_c_1000: "",
+    houseAgeRange: [0, 100]
   });
 
   const [houseAgeRange, setHouseAgeRange] = useState([0, 100]);
@@ -68,13 +69,13 @@ function Building() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <MDBInput className="mb-4" type="text" id="address" label="Address" onChange={handleInputChange} />
+      <MDBInput className="mb-4" type="text"  name="address" value={data.address} label="Address" onChange={handleInputChange} />
       <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput type="number" id="houseAge" label="House age"  onChange={handleInputChange} />
+          <MDBInput type="number" name="houseAge" label="House age" value={data.houseAge} onChange={handleInputChange} />
         </MDBCol>
         <MDBCol>
-          <MDBInput type="number" id="mainBuildingArea" label="Main Building Area" onChange={handleInputChange} />
+          <MDBInput type="number" name="mainBuildingArea" label="Main Building Area" value={data.mainBuildingArea} onChange={handleInputChange} />
         </MDBCol>
       </MDBRow>
 

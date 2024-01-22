@@ -39,11 +39,10 @@ def process():
         json: A json format with two keys, groupData and output.
     """
     data = request.json
-    print(data)
     inputData = data
-
+    
+    load_dotenv('../frontend/.env','REACT_APP_GOOGLE_MAPS_API_KEY')
     api = os.getenv('REACT_APP_GOOGLE_MAPS_API_KEY')
-
     # Convert from TWD97 to LatLon
     inputData = getLatLong(inputData, api)
 
@@ -58,8 +57,9 @@ def process():
     # Get LatLon and addr for groupData to show on map
     groupData = getGroupLatLon(groupData, api)
     groupData = convertGroupNumFeat(inputData['type'], groupData)
+    groupData.to_csv('./groupData.csv', index=False)
     groupData = groupData.to_json()
-
+    
     output={'groupData':groupData,'output':output }
     print('Inference done.')
     return output

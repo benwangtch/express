@@ -48,8 +48,8 @@ def imputeMissingValues(inputData, groupData):
     tmp['house_age'] = float(inputData['houseAge'])
     
     if inputData['type'] == 'apartment':
-        tmp['total_floor'] = float(inputData['floor'])
-        tmp['車位移轉總面積(坪)'] = float(inputData['car'])
+        tmp['total_floor'] = float(inputData['totalFloors'])
+        tmp['車位移轉總面積(坪)'] = float(inputData['parkingArea'])
         # Get most common for catFeat, mean for numFeat
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0] 
@@ -83,8 +83,8 @@ def imputeMissingValues(inputData, groupData):
                     tmp[numFeat] = groupData[numFeat].mean()
     else: # House
         tmp['far'] = float(inputData['far'])
-        tmp['土地移轉總面積(坪)'] = float(inputData['trans1'])
-        tmp['建物移轉總面積(坪)'] = float(inputData['trans2'])
+        tmp['土地移轉總面積(坪)'] = float(inputData['landTransferArea'])
+        tmp['建物移轉總面積(坪)'] = float(inputData['buildingTransferArea'])
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0]
         for numFeat in NumFeatList:

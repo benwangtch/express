@@ -59,7 +59,6 @@ def process():
     groupData = convertGroupNumFeat(inputData['type'], groupData)
     groupData.to_csv('./groupData.csv', index=False)
     groupData = groupData.to_json()
-    
     output={'groupData':groupData,'output':output }
     print('Inference done.')
     return output

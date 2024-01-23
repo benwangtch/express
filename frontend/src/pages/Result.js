@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import { MDBRow, MDBCol } from "mdb-react-ui-kit";
-// import axios from "axios";
+import axios from "axios";
 
 import Map from "../components/map";
 import SimilarProperties from "../components/similarProperties";
@@ -8,21 +8,24 @@ import ValuationResult from "../components/valuationResult";
 import { userInfo, similarInfo } from "../data/output";
 
 function Result() {
-  // const [data, setData] = useState("");
+  const [data, setData] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("/test");
-  //       setData(response.data.message);
-  //       console.log(JSON.stringify(response.data));
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post("/process");
+        setData(JSON.parse(response.data));
+        console.log(JSON.stringify(response.data));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
+  
+  // const userInfo = data.output;
+  // const similarInfo = JSON.parse(data.groupData);
 
   return (
     <>

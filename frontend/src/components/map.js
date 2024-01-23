@@ -78,10 +78,12 @@ function Map({ userAddress, similarAddress }) {
 
             {activeMarker && (
               <InfoWindowF position={activeMarker.location} onCloseClick={() => setActiveMarker(null)}>
-                <div>
-                  <h5>{activeMarker.title}</h5>
-                  <p>{activeMarker.description}</p>
-                </div>
+                <MDBCard>
+                  <MDBCardBody>
+                    <MDBCardTitle>{activeMarker.title}</MDBCardTitle>
+                    <p>{activeMarker.description}</p>
+                  </MDBCardBody>
+                </MDBCard>
               </InfoWindowF>
             )}
           </GoogleMap>

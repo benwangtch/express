@@ -5,6 +5,7 @@ import Navbar from "./layouts/Navbar";
 import Home from "./pages/Home";
 import Result from "./pages/Result";
 import Test from "./components/test";
+import Spinner from "./components/spinner";
 
 import "./App.css";
 
@@ -18,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/result" element={<Result />} />
-            <Route path="/test" element={<Test />} />
+            <Route path="/spinner" element={<Spinner />} />
           </Routes>
         </MDBContainer>
       </Router>

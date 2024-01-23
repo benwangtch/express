@@ -38,3 +38,10 @@ left: 0;
 z-index: 1;
 background-color: #d91111;
 }
+
+.spinner-border {
+  border-width: 0.6rem;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+} 

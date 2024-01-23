@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { MDBInput, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slider";
+import axios from "axios";
 
 // var apartmentRenderFeatures = ['price_pin','addr', 'house_age','total_floor', '車位移轉總面積(坪)','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'n_c_1000']
 // var apartmentRenderFeaturesEng = ['Unit Price', 'Address', 'House Age', 'Total Floor', 'Parking Area', 'Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area', 'Population Density', 'Main Building Area','n_c_1000' ]
@@ -23,51 +25,91 @@ function Apartment() {
     filter_n_c_1000: "",
   });
 
+  const {
+    address,
+    houseAge,
+    totalFloors,
+    parkingArea,
+    filter_totalFloors,
+    filter_houseAgeRange,
+    filter_parkingArea,
+    filter_floorAreaRatio,
+    filter_landTransferArea,
+    filter_buildingTransferArea,
+    filter_populationDensity,
+    filter_mainBuildingArea,
+    filter_n_c_1000,
+  } = data;
+
   let navigate = useNavigate();
 
   const handleInputChange = (e) => {
+    console.log(e.target.name, e.target.value);
     setData({
       ...data,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(data);
-    navigate("/result");
+    try {
+      const response = await axios.post("/process", data);
+      console.log("API Response:", response.data);
+      // Do something with the response if needed
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+    navigate("/result", { replace: true });
   };
+
+  const Thumb = (props, state) => (
+    <div
+      {...props}
+      style={{
+        ...props.style,
+        height: "25px",
+        width: "25px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <span style={{ fontSize: "12px" }}>{state.valueNow}</span>
+    </div>
+  );
 
   return (
     <form onSubmit={handleSubmit}>
       <MDBInput
         className="mb-4"
         type="text"
-        id="address"
+        name="address"
         label="Address"
         onChange={handleInputChange}
-        value={data.address}
+        value={address}
       />
       <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput type="number" id="houseAge" label="House age" onChange={handleInputChange} value={data.houseAge} />
+          <MDBInput type="number" name="houseAge" label="House age" onChange={handleInputChange} value={houseAge} />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="totalFloors"
+            name="totalFloors"
             label="Total Floors"
             onChange={handleInputChange}
-            value={data.totalFloors}
+            value={totalFloors}
           />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="parkingArea"
+            name="parkingArea"
             label="Parking Area"
             onChange={handleInputChange}
-            value={data.parkingArea}
+            value={parkingArea}
           />
         </MDBCol>
       </MDBRow>
@@ -77,24 +119,30 @@ function Apartment() {
       <h5>Filter (Optional)</h5>
       <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput type="number" id="houseAge" label="House age" onChange={handleInputChange} value={data.houseAge} />
+          <MDBInput
+            type="number"
+            name="filter_houseAgeRange"
+            label="House age"
+            onChange={handleInputChange}
+            value={filter_houseAgeRange}
+          />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="totalFloors"
+            name="filter_totalFloors"
             label="Total Floors"
             onChange={handleInputChange}
-            value={data.totalFloors}
+            value={filter_totalFloors}
           />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="parkingArea"
+            name="parkingArea"
             label="Parking Area"
             onChange={handleInputChange}
-            value={data.parkingArea}
+            value={filter_parkingArea}
           />
         </MDBCol>
       </MDBRow>
@@ -103,28 +151,28 @@ function Apartment() {
         <MDBCol>
           <MDBInput
             type="number"
-            id="floorAreaRatio"
+            name="filter_floorAreaRatio"
             label="Floor Area Ratio"
             onChange={handleInputChange}
-            value={data.floorAreaRatio}
+            value={filter_floorAreaRatio}
           />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="landTransferArea"
+            name="filter_landTransferArea"
             label="Land Transfer Area"
             onChange={handleInputChange}
-            value={data.landTransferArea}
+            value={filter_landTransferArea}
           />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="buildingTransferArea"
+            name="filter_buildingTransferArea"
             label="Building Transfer Area"
             onChange={handleInputChange}
-            value={data.buildingTransferArea}
+            value={filter_buildingTransferArea}
           />
         </MDBCol>
       </MDBRow>
@@ -133,23 +181,29 @@ function Apartment() {
         <MDBCol>
           <MDBInput
             type="number"
-            id="populationDensity"
+            name="filter_populationDensity"
             label="Population Density"
             onChange={handleInputChange}
-            value={data.populationDensity}
+            value={filter_populationDensity}
           />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
-            id="mainBuildingArea"
+            name="filter_mainBuildingArea"
             label="Main Building Area"
             onChange={handleInputChange}
-            value={data.mainBuildingArea}
+            value={filter_mainBuildingArea}
           />
         </MDBCol>
         <MDBCol>
-          <MDBInput type="number" id="n_c_1000" label="n_c_1000" onChange={handleInputChange} value={data.n_c_1000} />
+          <MDBInput
+            type="number"
+            name="filter_n_c_1000"
+            label="n_c_1000"
+            onChange={handleInputChange}
+            value={filter_n_c_1000}
+          />
         </MDBCol>
       </MDBRow>
 

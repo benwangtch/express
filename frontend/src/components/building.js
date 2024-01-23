@@ -23,7 +23,20 @@ function Building() {
     filter_houseAgeRange: [0, 100],
   });
 
-  const [houseAgeRange, setHouseAgeRange] = useState([0, 100]);
+  const {
+    address,
+    houseAge,
+    mainBuildingArea,
+    filter_floorAreaRatio,
+    filter_mainBuildingArea,
+    filter_landTransferArea,
+    filter_buildingTransferArea,
+    filter_populationDensity,
+    filter_totalFloors,
+    filter_parkingArea,
+    filter_n_c_1000,
+    filter_houseAgeRange,
+  } = data;
 
   let navigate = useNavigate();
 
@@ -35,9 +48,9 @@ function Building() {
     });
   };
 
-  const handleChange = (newValue) => {
-    setHouseAgeRange(newValue);
-  };
+  // const handleChange = (newValue) => {
+  //   setHouseAgeRange(newValue);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,26 +87,20 @@ function Building() {
         className="mb-4"
         type="text"
         name="address"
-        value={data.address}
+        value={address}
         label="Address"
         onChange={handleInputChange}
       />
       <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput
-            type="number"
-            name="houseAge"
-            label="House age"
-            value={data.houseAge}
-            onChange={handleInputChange}
-          />
+          <MDBInput type="number" name="houseAge" label="House age" value={houseAge} onChange={handleInputChange} />
         </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"
             name="mainBuildingArea"
             label="Main Building Area"
-            value={data.mainBuildingArea}
+            value={mainBuildingArea}
             onChange={handleInputChange}
           />
         </MDBCol>
@@ -103,11 +110,13 @@ function Building() {
 
       <h5>Filter</h5>
 
-      <div className="mb-4" label="House Age">
+      <div className="mb-4">
+        <h6>House Age</h6>
         <Slider
           className={"slider"}
-          value={houseAgeRange}
-          onChange={handleChange}
+          name="filter_houseAgeRange"
+          value={filter_houseAgeRange}
+          onChange={handleInputChange}
           min={0}
           max={100}
           step={1}
@@ -121,7 +130,7 @@ function Building() {
             type="number"
             name="filter_mainBuildingArea"
             label="Main Building Area"
-            value={data.filter_mainBuildingArea}
+            value={filter_mainBuildingArea}
             onChange={handleInputChange}
           />
         </MDBCol>
@@ -130,7 +139,7 @@ function Building() {
             type="number"
             name="filter_floorAreaRatio"
             label="Floor Area Ratio"
-            value={data.filter_floorAreaRatio}
+            value={filter_floorAreaRatio}
             onChange={handleInputChange}
           />
         </MDBCol>
@@ -142,7 +151,7 @@ function Building() {
             type="number"
             name="filter_landTransferArea"
             label="Land Transfer Area"
-            value={data.filter_landTransferArea}
+            value={filter_landTransferArea}
             onChange={handleInputChange}
           />
         </MDBCol>
@@ -152,7 +161,7 @@ function Building() {
             name="filter_buildingTransferArea"
             label="Building Transfer Area"
             onChange={handleInputChange}
-            value={data.filter_buildingTransferArea}
+            value={filter_buildingTransferArea}
           />
         </MDBCol>
         <MDBCol>
@@ -161,7 +170,7 @@ function Building() {
             name="filter_populationDensity"
             label="Population Density"
             onChange={handleInputChange}
-            value={data.filter_populationDensity}
+            value={filter_populationDensity}
           />
         </MDBCol>
       </MDBRow>
@@ -173,7 +182,7 @@ function Building() {
             name="filter_totalFloors"
             label="Total Floor"
             onChange={handleInputChange}
-            value={data.filter_totalFloors}
+            value={filter_totalFloors}
           />
         </MDBCol>
         <MDBCol>
@@ -182,7 +191,7 @@ function Building() {
             label="Parking Area"
             name="filter_parkingArea"
             onChange={handleInputChange}
-            value={data.filter_parkingArea}
+            value={filter_parkingArea}
           />
         </MDBCol>
         <MDBCol>
@@ -190,7 +199,7 @@ function Building() {
             type="number"
             name="filter_n_c_1000"
             label="n_c_1000"
-            value={data.filter_n_c_1000}
+            value={filter_n_c_1000}
             onChange={handleInputChange}
           />
         </MDBCol>

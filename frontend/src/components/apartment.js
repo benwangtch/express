@@ -117,16 +117,22 @@ function Apartment() {
       <hr className="hr" />
 
       <h5>Filter (Optional)</h5>
+
+      <div className="mb-4">
+        <h6>House Age</h6>
+        <Slider
+          className={"slider"}
+          name="filter_houseAgeRange"
+          value={filter_houseAgeRange}
+          onChange={handleInputChange}
+          min={0}
+          max={100}
+          step={1}
+          renderThumb={Thumb}
+        />
+      </div>
+
       <MDBRow className="mb-4">
-        <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_houseAgeRange"
-            label="House age"
-            onChange={handleInputChange}
-            value={filter_houseAgeRange}
-          />
-        </MDBCol>
         <MDBCol>
           <MDBInput
             type="number"

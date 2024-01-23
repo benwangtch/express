@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+import React from "react";
+import { MDBTable, MDBTableHead, MDBTableBody, MDBCard, MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
+import { processValData } from "../data/processValData";
 
-function ValuationResult({ userAddress }) {
-  const header = Object.keys(userAddress);
-  const dataValues = Object.values(userAddress);
+function ValuationResult({ userInfo }) {
+  const { header, data } = processValData(userInfo);
 
   return (
-    <MDBTable responsive>
-      <MDBTableHead light>
-        <tr>
-          {header.map((title, index) => (
-            <th key={index}>{title}</th>
-          ))}
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          {dataValues.map((value, index) => (
-            <td key={index} style={{ whiteSpace: "nowrap" }}>
-              {value}
-            </td>
-          ))}
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
+    <MDBCard>
+      <MDBCardBody>
+        <MDBCardTitle>ValuationResult</MDBCardTitle>
+        <MDBTable responsive>
+          <MDBTableHead light className="sticky-table-header">
+            <tr>
+              {header.map((title, index) => (
+                <th key={index} style={{ whiteSpace: "nowrap" }}>
+                  {title}
+                </th>
+              ))}
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            <tr>
+              {data.map((value, index) => (
+                <td key={index} style={{ whiteSpace: "nowrap" }}>
+                  {value}
+                </td>
+              ))}
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+      </MDBCardBody>
+    </MDBCard>
   );
 }
 

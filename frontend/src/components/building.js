@@ -41,13 +41,13 @@ function Building() {
     e.preventDefault();
     console.log(data);
     try {
-      const response = await axios.post('/process', data);
-      console.log('API Response:', response.data);
+      const response = await axios.post("/process", data);
+      console.log("API Response:", response.data);
       // Do something with the response if needed
     } catch (error) {
-      console.error('Error sending data:', error);
+      console.error("Error sending data:", error);
     }
-    navigate("/result", {replace: true});
+    navigate("/result", { replace: true });
   };
 
   const Thumb = (props, state) => (
@@ -68,10 +68,17 @@ function Building() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <MDBInput className="mb-4" type="text" id="address" label="Address" onChange={handleInputChange} />
+      <MDBInput
+        className="mb-4"
+        type="text"
+        name="address"
+        label="Address"
+        value={data.address}
+        onChange={handleInputChange}
+      />
       <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput type="number" id="houseAge" label="House age"  onChange={handleInputChange} />
+          <MDBInput type="number" id="houseAge" label="House age" onChange={handleInputChange} />
         </MDBCol>
         <MDBCol>
           <MDBInput type="number" id="mainBuildingArea" label="Main Building Area" onChange={handleInputChange} />

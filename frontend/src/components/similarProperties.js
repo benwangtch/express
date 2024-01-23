@@ -1,30 +1,39 @@
 import React from "react";
-import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+import { MDBTable, MDBTableHead, MDBTableBody, MDBCard, MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
+import { processSimiData } from "../data/processSimiData";
 
-function SimilarProperties({ similarAddress }) {
-  const header = Object.keys(similarAddress[0]);
-  const buildings = similarAddress;
+function SimilarProperties({ userInfo, similarInfo }) {
+  const { header, data } = processSimiData(userInfo, similarInfo);
+  const dataKey = Object.keys(data[0]);
 
   return (
-    <MDBTable responsive>
-      <MDBTableHead light>
-        <tr>
-          {header.map((title, index) => (
-            <th key={index}>{title}</th>
-          ))}
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        {buildings.map((building, index) => (
-          <tr key={index}>
-            <td>{building.type}</td>
-            <td>{building.address}</td>
-            <td>{building.houseAge}</td>
-            <td>{building.mainBuildingArea}</td>
-          </tr>
-        ))}
-      </MDBTableBody>
-    </MDBTable>
+    <MDBCard>
+      <MDBCardBody>
+        <MDBCardTitle>SimilarProperties</MDBCardTitle>
+        <MDBTable responsive>
+          <MDBTableHead light>
+            <tr>
+              {header.map((title, index) => (
+                <th key={index} style={{ whiteSpace: "nowrap" }}>
+                  {title}
+                </th>
+              ))}
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {data.map((building, index) => (
+              <tr key={index}>
+                {dataKey.map((key) => (
+                  <td key={key} style={{ whiteSpace: "nowrap" }}>
+                    {building[key]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </MDBTableBody>
+        </MDBTable>
+      </MDBCardBody>
+    </MDBCard>
   );
 }
 

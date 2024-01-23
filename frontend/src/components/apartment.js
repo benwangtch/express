@@ -15,12 +15,15 @@ function Apartment() {
     houseAge: "",
     totalFloors: "",
     parkingArea: "",
-    floorAreaRatio: "",
-    landTransferArea: "",
-    buildingTransferArea: "",
-    populationDensity: "",
-    mainBuildingArea: "",
-    n_c_1000: "",
+    filter_totalFloors: "",
+    filter_houseAgeRange: [0, 100],
+    filter_parkingArea: "",
+    filter_floorAreaRatio: "",
+    filter_landTransferArea: "",
+    filter_buildingTransferArea: "",
+    filter_populationDensity: "",
+    filter_mainBuildingArea: "",
+    filter_n_c_1000: "",
   });
 
   let navigate = useNavigate();

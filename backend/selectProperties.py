@@ -54,7 +54,7 @@ def getSimilarProperties(inputData):
         inputData['landTransferArea'] = take_log(inputData['landTransferArea'])
         inputData['buildingTransferArea'] = take_log(inputData['buildingTransferArea'])
         groupByFar = []
-        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['far'], groupByFar)
+        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['floorAreaRatio'], groupByFar)
         
         groupByLandTransfer = []
         groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)

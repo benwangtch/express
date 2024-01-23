@@ -14,13 +14,13 @@ const libraries = ["places"];
 
 function Map({ userAddress, similarAddress }) {
   const userInfo = {
-    address: userAddress.address,
+    address: userAddress.addr,
     location: { lat: userAddress.lat, lng: userAddress.lon },
     price: userAddress.price_pin,
   };
 
   const similarInfo = similarAddress.map((item) => ({
-    address: item.address,
+    address: item.addr,
     location: { lat: parseFloat(item.lat), lng: parseFloat(item.lon) },
     price: item.price_pin,
     bed: item["建物現況格局-房"],

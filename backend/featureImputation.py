@@ -82,7 +82,7 @@ def imputeMissingValues(inputData, groupData):
                 else:
                     tmp[numFeat] = groupData[numFeat].mean()
     else: # House
-        tmp['far'] = float(inputData['far'])
+        tmp['far'] = float(inputData['floorAreaRatio'])
         tmp['土地移轉總面積(坪)'] = float(inputData['landTransferArea'])
         tmp['建物移轉總面積(坪)'] = float(inputData['buildingTransferArea'])
         for catFeat in CatFeatList:

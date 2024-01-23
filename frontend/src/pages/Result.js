@@ -1,28 +1,17 @@
 import React, { useEffect, useState, memo } from "react";
 import { MDBRow, MDBCol } from "mdb-react-ui-kit";
 import axios from "axios";
-
+import { useLocation } from 'react-router-dom';
 import Map from "../components/map";
 import SimilarProperties from "../components/similarProperties";
 import ValuationResult from "../components/valuationResult";
 import { userInfo, similarInfo } from "../data/output";
 
 function Result() {
-  const [data, setData] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post("/process");
-        setData(JSON.parse(response.data));
-        console.log(JSON.stringify(response.data));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const location = useLocation();
+  const { responseData } = location.state || {};
+  const userInfo = responseData?.output || {};
+  const similarInfo = JSON.parse(responseData?.groupData || {});
   
   // const userInfo = data.output;
   // const similarInfo = JSON.parse(data.groupData);

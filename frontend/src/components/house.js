@@ -58,12 +58,16 @@ function House() {
     console.log(data);
     try {
       const response = await axios.post("/process", data);
-      console.log("API Response:", response.data);
-      // Do something with the response if needed
+      console.log(response.data);
+      navigate("/result", {
+        state: {
+          responseData: response.data,
+        },
+        replace: true,
+      });
     } catch (error) {
       console.error("Error sending data:", error);
     }
-    navigate("/result", { replace: true });
   };
 
   const Thumb = (props, state) => (

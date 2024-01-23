@@ -12,6 +12,15 @@ function House() {
     houseAge: "",
     totalFloors: "",
     parkingArea: "",
+    filter_totalFloors: "",
+    filter_floorAreaRatio: "",
+    filter_mainBuildingArea: "",
+    filter_landTransferArea: "",
+    filter_buildingTransferArea: "",
+    filter_populationDensity: "",
+    filter_parkingArea: "",
+    filter_n_c_1000: "",
+    filter_houseAgeRange: [0, 100],
   });
 
   let navigate = useNavigate();

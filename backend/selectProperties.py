@@ -32,7 +32,7 @@ def getSimilarProperties(inputData):
     groupByDist = selectByDist(data, groupNumList[0], [inputData['x座標'], inputData['y座標']], groupByDist)
     
     groupByAge = []
-    groupByAge = selectByAge(groupByDist, groupNumList[1], inputData['age'], groupByAge)
+    groupByAge = selectByAge(groupByDist, groupNumList[1], inputData['houseAge'], groupByAge)
     
     if inputData['type'] == 'apartment':
         # Convert the features taken log while training
@@ -45,9 +45,9 @@ def getSimilarProperties(inputData):
         return groupByParking
     elif inputData['type'] == 'building':
         # Convert the features taken log while training
-        inputData['area'] = take_log(inputData['area'])
+        inputData['mainBuildingArea'] = take_log(inputData['mainBuildingArea'])
         groupByArea = []
-        groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['area'], groupByArea)
+        groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['mainBuildingArea'], groupByArea)
         return groupByArea
     else:
         # Convert the features taken log while training

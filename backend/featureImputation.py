@@ -45,7 +45,7 @@ def imputeMissingValues(inputData, groupData):
     tmp  = pd.DataFrame(columns=allFeatList, index=[0])
     tmp['x座標'] = float(inputData['x座標'])
     tmp['y座標'] = float(inputData['y座標'])
-    tmp['house_age'] = float(inputData['age'])
+    tmp['house_age'] = float(inputData['houseAge'])
     
     if inputData['type'] == 'apartment':
         tmp['total_floor'] = float(inputData['floor'])
@@ -66,7 +66,7 @@ def imputeMissingValues(inputData, groupData):
                     tmp[numFeat] = groupData[numFeat].mean()
         
     elif inputData['type'] == 'building':
-        tmp['主建物面積'] = float(inputData['area'])
+        tmp['主建物面積'] = float(inputData['mainBuildingArea'])
         
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0]
@@ -118,10 +118,8 @@ def getLatLong(inputData, api):
         inputData: Added the keys of converted coordinates.
     """
     address =inputData['address']
-    print(address)
     res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api}')
     resJson = res.json()
-    print(resJson)
     resJson = resJson['results'][0]
     latlng = resJson['geometry']['location']
     # Save the lat,lng to inference data

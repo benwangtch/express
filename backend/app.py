@@ -5,6 +5,7 @@ import ast
 from utils import *
 from selectProperties import *
 from featureImputation import *
+from selectByKNN import *
 from inference import *
 from dotenv import load_dotenv
 import os
@@ -47,9 +48,10 @@ def process():
     # Convert from TWD97 to LatLon
     inputData = getLatLong(inputData, api)
 
-    groupData = getSimilarProperties(inputData)
+    groupData = selectByKNN(inputData)
+    # groupData = getSimilarProperties(inputData)
     # For Case study
-    # groupData.to_csv('./similar_data.csv', index=False)
+    groupData.to_csv('./similar_data_knn.csv', index=False)
     inferenceData = imputeMissingValues(inputData, groupData)
     # For Case study
     # outputInf = pd.DataFrame(inferenceData)

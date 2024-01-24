@@ -50,11 +50,37 @@ function Building() {
     });
   };
 
+  const handleInputChangeSlider = (e) => {
+    setData({
+      ...data,
+      filter_houseAgeRange: e,
+    });
+  };
+
   // real submit
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   console.log(data);
+  //   try {
+  //     const response = await axios.post("/process", data);
+  //     navigate("/result", {
+  //       state: {
+  //         responseData: response.data,
+  //       },
+  //       replace: true,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error sending data:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // test submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     console.log(data);
     try {
       const response = await axios.post("/process", data);
@@ -139,19 +165,22 @@ function Building() {
 
       <h5>Filter</h5>
 
-      <div className="mb-4">
+      <MDBRow className="mb-4">
         <h6>House Age</h6>
+        <br />
         <Slider
-          className={"slider"}
-          name="filter_houseAgeRange"
+          className="slider"
+          trackClassName="slider-track"
+          thumbClassName="slider-thumb"
           value={filter_houseAgeRange}
-          onChange={handleInputChange}
+          onChange={handleInputChangeSlider}
           min={0}
           max={100}
           step={1}
           renderThumb={Thumb}
         />
-      </div>
+      </MDBRow>
+      <br />
 
       <MDBRow className="mb-4">
         <MDBCol>
@@ -234,7 +263,13 @@ function Building() {
         </MDBCol>
       </MDBRow>
       <div className="d-grid gap-2 justify-content-md-end">
-        <MDBBtn type="submit" disabled={loading} style={{ width: "100px", height: "ˇ30px" }} color="dark">
+        <MDBBtn
+          type="submit"
+          disabled={loading}
+          style={{ width: "100px", height: "ˇ30px" }}
+          color="dark"
+          className="opacity-50"
+        >
           {loading ? (
             <>
               <MDBSpinner size="sm" role="status" tag="span" />

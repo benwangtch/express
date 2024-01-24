@@ -1,7 +1,7 @@
 import React from "react";
 import { MDBTable, MDBTableHead, MDBTableBody, MDBCard, MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
 import { processSimiData } from "../data/processSimiData";
-// 
+//
 function SimilarProperties({ userInfo, similarInfo }) {
   const { header, data } = processSimiData(userInfo, similarInfo);
   const dataKey = Object.keys(data[0]);
@@ -10,7 +10,7 @@ function SimilarProperties({ userInfo, similarInfo }) {
     <MDBCard>
       <MDBCardBody>
         <MDBCardTitle>SimilarProperties</MDBCardTitle>
-        <MDBTable responsive>
+        <MDBTable responsive className="rounded-border-table">
           <MDBTableHead light>
             <tr>
               {header.map((title, index) => (

@@ -9,8 +9,8 @@ function ValuationResult({ userInfo }) {
     <MDBCard>
       <MDBCardBody>
         <MDBCardTitle>ValuationResult</MDBCardTitle>
-        <MDBTable responsive>
-          <MDBTableHead light className="sticky-table-header">
+        <MDBTable responsive className="rounded-border-table">
+          <MDBTableHead light>
             <tr>
               {header.map((title, index) => (
                 <th key={index} style={{ whiteSpace: "nowrap" }}>

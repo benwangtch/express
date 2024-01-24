@@ -55,6 +55,13 @@ function House() {
     });
   };
 
+  const handleInputChangeSlider = (e) => {
+    setData({
+      ...data,
+      filter_houseAgeRange: e,
+    });
+  };
+
   // real submit
 
   const handleSubmit = async (e) => {
@@ -141,19 +148,22 @@ function House() {
 
       <h5>Filter</h5>
 
-      <div className="mb-4">
+      <MDBRow className="mb-4">
         <h6>House Age</h6>
+        <br />
         <Slider
-          className={"slider"}
-          name="filter_houseAgeRange"
+          className="slider"
+          trackClassName="slider-track"
+          thumbClassName="slider-thumb"
           value={filter_houseAgeRange}
-          onChange={handleInputChange}
+          onChange={handleInputChangeSlider}
           min={0}
           max={100}
           step={1}
           renderThumb={Thumb}
         />
-      </div>
+      </MDBRow>
+      <br />
 
       <MDBRow className="mb-4">
         <MDBCol>

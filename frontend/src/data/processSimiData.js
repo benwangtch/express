@@ -86,14 +86,14 @@ export const processSimiData = (user, similar) => {
   const header =
     user.type === "building"
       ? Object.values(buildingHeader)
-      : userAddress.type === "apartment"
+      : user.type === "apartment"
       ? Object.values(apartmentHeader)
       : Object.values(houseHeader);
 
   const data =
     user.type === "building"
       ? Object.values(buildingData)
-      : userAddress.type === "apartment"
+      : user.type === "apartment"
       ? Object.values(apartmentData)
       : Object.values(houseData);
 

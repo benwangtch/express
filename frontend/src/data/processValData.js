@@ -1,4 +1,4 @@
-export const processValData = (userAddress) => {
+export const processValData = (user) => {
   const buildingHeader = [
     "Unit Price",
     "Address",
@@ -42,58 +42,58 @@ export const processValData = (userAddress) => {
   ];
 
   const buildingData = {
-    unitPrice: userAddress.price_pin,
-    address: userAddress.addr,
-    houseAge: userAddress.house_age,
-    mainBuildingArea: userAddress["主建物面積"],
-    floorAreaRatio: userAddress.far,
-    landTransferArea: userAddress["土地移轉總面積(坪)"],
-    buildingTransferArea: userAddress["建物移轉總面積(坪)"],
-    populationDensity: userAddress.population_density,
-    totalFloors: userAddress.total_floor,
-    parkingArea: userAddress["車位移轉總面積(坪)"],
-    n_c_1000: userAddress.n_c_1000,
+    unitPrice: user.price_pin,
+    address: user.addr,
+    houseAge: user.house_age,
+    mainBuildingArea: user["主建物面積"],
+    floorAreaRatio: user.far,
+    landTransferArea: user["土地移轉總面積(坪)"],
+    buildingTransferArea: user["建物移轉總面積(坪)"],
+    populationDensity: user.population_density,
+    totalFloors: user.total_floor,
+    parkingArea: user["車位移轉總面積(坪)"],
+    n_c_1000: user.n_c_1000,
   };
 
   const apartmentData = {
-    unitPrice: userAddress.price_pin,
-    address: userAddress.addr,
-    floorAreaRatio: userAddress.far,
-    houseAge: userAddress.house_age,
-    landTransferArea: userAddress["土地移轉總面積(坪)"],
-    buildingTransferArea: userAddress["建物移轉總面積(坪)"],
-    totalFloors: userAddress.total_floor,
-    parkingArea: userAddress["車位移轉總面積(坪)"],
-    populationDensity: userAddress.population_density,
-    mainBuildingArea: userAddress["主建物面積"],
-    n_c_1000: userAddress.n_c_1000,
+    unitPrice: user.price_pin,
+    address: user.addr,
+    floorAreaRatio: user.far,
+    houseAge: user.house_age,
+    landTransferArea: user["土地移轉總面積(坪)"],
+    buildingTransferArea: user["建物移轉總面積(坪)"],
+    totalFloors: user.total_floor,
+    parkingArea: user["車位移轉總面積(坪)"],
+    populationDensity: user.population_density,
+    mainBuildingArea: user["主建物面積"],
+    n_c_1000: user.n_c_1000,
   };
 
   const houseData = {
-    unitPrice: userAddress.price_pin,
-    address: userAddress.addr,
-    houseAge: userAddress.house_age,
-    totalFloors: userAddress.total_floor,
-    parkingArea: userAddress["車位移轉總面積(坪)"],
-    floorAreaRatio: userAddress.far,
-    landTransferArea: userAddress["土地移轉總面積(坪)"],
-    buildingTransferArea: userAddress["建物移轉總面積(坪)"],
-    populationDensity: userAddress.population_density,
-    mainBuildingArea: userAddress["主建物面積"],
-    n_c_1000: userAddress.n_c_1000,
+    unitPrice: user.price_pin,
+    address: user.addr,
+    houseAge: user.house_age,
+    totalFloors: user.total_floor,
+    parkingArea: user["車位移轉總面積(坪)"],
+    floorAreaRatio: user.far,
+    landTransferArea: user["土地移轉總面積(坪)"],
+    buildingTransferArea: user["建物移轉總面積(坪)"],
+    populationDensity: user.population_density,
+    mainBuildingArea: user["主建物面積"],
+    n_c_1000: user.n_c_1000,
   };
 
   const header =
-    userAddress.type === "building"
+    user.type === "building"
       ? Object.values(buildingHeader)
-      : userAddress.type === "apartment"
+      : user.type === "apartment"
       ? Object.values(apartmentHeader)
       : Object.values(houseHeader);
 
   const data =
-    userAddress.type === "building"
+    user.type === "building"
       ? Object.values(buildingData)
-      : userAddress.type === "apartment"
+      : user.type === "apartment"
       ? Object.values(apartmentData)
       : Object.values(houseData);
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBInput, MDBRow, MDBCol, MDBBtn,MDBSpinner } from "mdb-react-ui-kit";
+import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slider";
 import axios from "axios";
@@ -93,7 +93,7 @@ function Apartment() {
         alignItems: "center",
       }}
     >
-      <span style={{ fontSize: "12px" }}>{state.valueNow}</span>
+      <span style={{ fontSize: "12px", color: "white" }}>{state.valueNow}</span>
     </div>
   );
 

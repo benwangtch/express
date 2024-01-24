@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBInput, MDBRow, MDBCol, MDBBtn,MDBSpinner } from "mdb-react-ui-kit";
+import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slider";
 import axios from "axios";
@@ -95,7 +95,7 @@ function House() {
         alignItems: "center",
       }}
     >
-      <span style={{ fontSize: "12px" }}>{state.valueNow}</span>
+      <span style={{ fontSize: "12px", color: "white" }}>{state.valueNow}</span>
     </div>
   );
 
@@ -146,7 +146,7 @@ function House() {
 
       <hr className="hr" />
 
-      <h5>Filter</h5>
+      <h5>Filter (Optional)</h5>
 
       <MDBRow className="mb-4">
         <h6>House Age</h6>

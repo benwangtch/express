@@ -12,7 +12,6 @@ function Result() {
   const { responseData } = location.state || {};
   const userInfo = responseData?.output || {};
   const similarInfo = JSON.parse(responseData?.groupData || {});
-  console.log(similarInfo);
 
   // const userInfo = data.output;
   // const similarInfo = JSON.parse(data.groupData);

@@ -79,9 +79,26 @@ function Building() {
   };
 
   // test submit
-  // const handleSubmit = (e) => {
+  // const handleSubmit = async (e) => {
   //   e.preventDefault();
+  //   setLoading(true);
   //   console.log(data);
+
+  //   try {
+  //     setTimeout(() => {
+  //       const mockResponse = { data: "mock data" };
+  //       navigate("/result", {
+  //         state: {
+  //           responseData: mockResponse.data,
+  //         },
+  //         replace: true,
+  //       });
+  //       setLoading(false);
+  //     }, 5000);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setLoading(false);
+  //   }
   // };
 
   const Thumb = (props, state) => (

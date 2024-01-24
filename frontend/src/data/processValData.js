@@ -41,46 +41,51 @@ export const processValData = (user) => {
     "n_c_1000",
   ];
 
+  const formatNumber = (value) => {
+    const number = parseFloat(value);
+    return !isNaN(number) ? +number.toFixed(2) : value;
+  };
+
   const buildingData = {
-    unitPrice: user.price_pin,
+    unitPrice: formatNumber(user.price_pin),
     address: user.addr,
-    houseAge: user.house_age,
-    mainBuildingArea: user["主建物面積"],
-    floorAreaRatio: user.far,
-    landTransferArea: user["土地移轉總面積(坪)"],
-    buildingTransferArea: user["建物移轉總面積(坪)"],
-    populationDensity: user.population_density,
-    totalFloors: user.total_floor,
-    parkingArea: user["車位移轉總面積(坪)"],
-    n_c_1000: user.n_c_1000,
+    houseAge: formatNumber(user.house_age),
+    mainBuildingArea: formatNumber(user["主建物面積"]),
+    floorAreaRatio: formatNumber(user.far),
+    landTransferArea: formatNumber(user["土地移轉總面積(坪)"]),
+    buildingTransferArea: formatNumber(user["建物移轉總面積(坪)"]),
+    populationDensity: formatNumber(user.population_density),
+    totalFloors: formatNumber(user.total_floor),
+    parkingArea: formatNumber(user["車位移轉總面積(坪)"]),
+    n_c_1000: formatNumber(user.n_c_1000),
   };
 
   const apartmentData = {
-    unitPrice: user.price_pin,
+    unitPrice: formatNumber(user.price_pin),
     address: user.addr,
-    floorAreaRatio: user.far,
-    houseAge: user.house_age,
-    landTransferArea: user["土地移轉總面積(坪)"],
-    buildingTransferArea: user["建物移轉總面積(坪)"],
-    totalFloors: user.total_floor,
-    parkingArea: user["車位移轉總面積(坪)"],
-    populationDensity: user.population_density,
-    mainBuildingArea: user["主建物面積"],
-    n_c_1000: user.n_c_1000,
+    floorAreaRatio: formatNumber(user.far),
+    houseAge: formatNumber(user.house_age),
+    landTransferArea: formatNumber(user["土地移轉總面積(坪)"]),
+    buildingTransferArea: formatNumber(user["建物移轉總面積(坪)"]),
+    totalFloors: formatNumber(user.total_floor),
+    parkingArea: formatNumber(user["車位移轉總面積(坪)"]),
+    populationDensity: formatNumber(user.population_density),
+    mainBuildingArea: formatNumber(user["主建物面積"]),
+    n_c_1000: formatNumber(user.n_c_1000),
   };
 
   const houseData = {
-    unitPrice: user.price_pin,
+    unitPrice: formatNumber(user.price_pin),
     address: user.addr,
-    houseAge: user.house_age,
-    totalFloors: user.total_floor,
-    parkingArea: user["車位移轉總面積(坪)"],
-    floorAreaRatio: user.far,
-    landTransferArea: user["土地移轉總面積(坪)"],
-    buildingTransferArea: user["建物移轉總面積(坪)"],
-    populationDensity: user.population_density,
-    mainBuildingArea: user["主建物面積"],
-    n_c_1000: user.n_c_1000,
+    houseAge: formatNumber(user.house_age),
+    totalFloors: formatNumber(user.total_floor),
+    parkingArea: formatNumber(user["車位移轉總面積(坪)"]),
+    floorAreaRatio: formatNumber(user.far),
+    landTransferArea: formatNumber(user["土地移轉總面積(坪)"]),
+    buildingTransferArea: formatNumber(user["建物移轉總面積(坪)"]),
+    populationDensity: formatNumber(user.population_density),
+    mainBuildingArea: formatNumber(user["主建物面積"]),
+    n_c_1000: formatNumber(user.n_c_1000),
   };
 
   const header =

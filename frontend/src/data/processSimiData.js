@@ -41,46 +41,51 @@ export const processSimiData = (user, similar) => {
     "n_c_1000",
   ];
 
+  const formatNumber = (value) => {
+    const number = parseFloat(value);
+    return !isNaN(number) ? +number.toFixed(2) : value;
+  };
+
   const buildingData = similar.map((item) => ({
-    unitPrice: item.price_pin,
+    unitPrice: formatNumber(item.price_pin),
     address: item.addr,
-    houseAge: item.house_age,
-    mainBuildingArea: item["主建物面積"],
-    floorAreaRatio: item.far,
-    landTransferArea: item["土地移轉總面積(坪)"],
-    buildingTransferArea: item["建物移轉總面積(坪)"],
-    populationDensity: item.population_density,
-    totalFloors: item.total_floor,
-    parkingArea: item["車位移轉總面積(坪)"],
-    n_c_1000: item.n_c_1000,
+    houseAge: formatNumber(item.house_age),
+    mainBuildingArea: formatNumber(item["主建物面積"]),
+    floorAreaRatio: formatNumber(item.far),
+    landTransferArea: formatNumber(item["土地移轉總面積(坪)"]),
+    buildingTransferArea: formatNumber(item["建物移轉總面積(坪)"]),
+    populationDensity: formatNumber(item.population_density),
+    totalFloors: formatNumber(item.total_floor),
+    parkingArea: formatNumber(item["車位移轉總面積(坪)"]),
+    n_c_1000: formatNumber(item.n_c_1000),
   }));
 
   const apartmentData = similar.map((item) => ({
-    unitPrice: item.price_pin,
+    unitPrice: formatNumber(item.price_pin),
     address: item.addr,
-    houseAge: item.house_age,
-    totalFloors: item.total_floor,
-    parkingArea: item["車位移轉總面積(坪)"],
-    floorAreaRatio: item.far,
-    landTransferArea: item["土地移轉總面積(坪)"],
-    buildingTransferArea: item["建物移轉總面積(坪)"],
-    populationDensity: item.population_density,
-    mainBuildingArea: item["主建物面積"],
-    n_c_1000: item.n_c_1000,
+    houseAge: formatNumber(item.house_age),
+    totalFloors: formatNumber(item.total_floor),
+    parkingArea: formatNumber(item["車位移轉總面積(坪)"]),
+    floorAreaRatio: formatNumber(item.far),
+    landTransferArea: formatNumber(item["土地移轉總面積(坪)"]),
+    buildingTransferArea: formatNumber(item["建物移轉總面積(坪)"]),
+    populationDensity: formatNumber(item.population_density),
+    mainBuildingArea: formatNumber(item["主建物面積"]),
+    n_c_1000: formatNumber(item.n_c_1000),
   }));
 
   const houseData = similar.map((item) => ({
-    unitPrice: item.price_pin,
+    unitPrice: formatNumber(item.price_pin),
     address: item.addr,
-    floorAreaRatio: item.far,
-    houseAge: item.house_age,
-    landTransferArea: item["土地移轉總面積(坪)"],
-    buildingTransferArea: item["建物移轉總面積(坪)"],
-    totalFloors: item.total_floor,
-    parkingArea: item["車位移轉總面積(坪)"],
-    populationDensity: item.population_density,
-    mainBuildingArea: item["主建物面積"],
-    n_c_1000: item.n_c_1000,
+    floorAreaRatio: formatNumber(item.far),
+    houseAge: formatNumber(item.house_age),
+    landTransferArea: formatNumber(item["土地移轉總面積(坪)"]),
+    buildingTransferArea: formatNumber(item["建物移轉總面積(坪)"]),
+    totalFloors: formatNumber(item.total_floor),
+    parkingArea: formatNumber(item["車位移轉總面積(坪)"]),
+    populationDensity: formatNumber(item.population_density),
+    mainBuildingArea: formatNumber(item["主建物面積"]),
+    n_c_1000: formatNumber(item.n_c_1000),
   }));
 
   const header =

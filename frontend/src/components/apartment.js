@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBInput, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import { MDBInput, MDBRow, MDBCol, MDBBtn,MDBSpinner } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slider";
 import axios from "axios";

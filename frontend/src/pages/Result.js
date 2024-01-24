@@ -8,10 +8,10 @@ import ValuationResult from "../components/valuationResult";
 import { userInfo, similarInfo } from "../data/output";
 
 function Result() {
-  // const location = useLocation();
-  // const { responseData } = location.state || {};
-  // const userInfo = responseData?.output || {};
-  // const similarInfo = JSON.parse(responseData?.groupData || {});
+  const location = useLocation();
+  const { responseData } = location.state || {};
+  const userInfo = responseData?.output || {};
+  const similarInfo = JSON.parse(responseData?.groupData || {});
 
   // const userInfo = data.output;
   // const similarInfo = JSON.parse(data.groupData);

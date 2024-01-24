@@ -52,47 +52,47 @@ function Building() {
 
   // real submit
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   console.log(data);
-  //   try {
-  //     const response = await axios.post("/process", data);
-  //     navigate("/result", {
-  //       state: {
-  //         responseData: response.data,
-  //       },
-  //       replace: true,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error sending data:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // test submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     console.log(data);
-
     try {
-      setTimeout(() => {
-        const mockResponse = { data: "mock data" };
-        navigate("/result", {
-          state: {
-            responseData: mockResponse.data,
-          },
-          replace: true,
-        });
-        setLoading(false);
-      }, 5000);
+      const response = await axios.post("/process", data);
+      navigate("/result", {
+        state: {
+          responseData: response.data,
+        },
+        replace: true,
+      });
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error sending data:", error);
+    } finally {
       setLoading(false);
     }
   };
+
+  // test submit
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   console.log(data);
+
+  //   try {
+  //     setTimeout(() => {
+  //       const mockResponse = { data: "mock data" };
+  //       navigate("/result", {
+  //         state: {
+  //           responseData: mockResponse.data,
+  //         },
+  //         replace: true,
+  //       });
+  //       setLoading(false);
+  //     }, 5000);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setLoading(false);
+  //   }
+  // };
 
   const Thumb = (props, state) => (
     <div

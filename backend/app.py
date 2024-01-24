@@ -39,6 +39,7 @@ def process():
         json: A json format with two keys, groupData and output.
     """
     data = request.json
+    print(data)
     inputData = data
 
     load_dotenv("../frontend/.env", "REACT_APP_GOOGLE_MAPS_API_KEY")
@@ -56,22 +57,13 @@ def process():
     output = inference(inputData["type"], inferenceData, inputData)
     # Get LatLon and addr for groupData to show on map
     groupData = getGroupLatLon(groupData, api)
-<<<<<<< HEAD
-    groupData = convertGroupNumFeat(inputData["type"], groupData)
-    groupData.to_csv("./groupData.csv", index=False)
-    groupData = groupData.to_json()
-
-    output = {"groupData": groupData, "output": output}
-    print("Inference done.")
-=======
     groupData = convertGroupNumFeat(inputData['type'], groupData)
     groupData.to_csv('./groupData.csv', index=False)
     groupData = groupData.to_json(orient='records')
     output={'groupData':groupData,'output':output }
     print('Inference done.')
->>>>>>> 3e322c8d0659e943be9b076f1cff78d59143da91
     return output
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=5000)

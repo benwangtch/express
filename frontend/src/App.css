@@ -45,3 +45,7 @@ background-color: #d91111;
   top: 40%;
   left: 45%;
 }  */
+
+.my-custom-card {
+  padding: 0.5rem; /* 或你想要的任何值 */
+}

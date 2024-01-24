@@ -1,6 +1,16 @@
 import React, { useState, memo, useEffect } from "react";
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from "@react-google-maps/api";
-import { MDBCard, MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBIcon,
+  MDBRow,
+  MDBCol,
+  MDBCardText,
+  MDBCardHeader,
+  MDBBtn,
+} from "mdb-react-ui-kit";
 
 import userHouse from "../imgs/userHouse.svg";
 import simiHouse from "../imgs/simiHouse.svg";
@@ -13,19 +23,24 @@ const containerStyle = {
 const libraries = ["places"];
 
 function Map({ userAddress, similarAddress }) {
+  const formatNumber = (value) => {
+    const number = parseFloat(value);
+    return !isNaN(number) ? +number.toFixed(2) : value;
+  };
+
   const userInfo = {
     address: userAddress.addr,
     location: { lat: userAddress.lat, lng: userAddress.lon },
-    price: userAddress.price_pin,
+    price: formatNumber(userAddress.price_pin),
   };
 
   const similarInfo = similarAddress.map((item) => ({
     address: item.addr,
     location: { lat: parseFloat(item.lat), lng: parseFloat(item.lon) },
-    price: item.price_pin,
+    price: formatNumber(item.price_pin),
     bed: item["建物現況格局-房"],
     living: item["建物現況格局-廳"],
-    area: item["主建物面積"],
+    area: formatNumber(item["主建物面積"]),
   }));
 
   const [mapCenter, setMapCenter] = useState(userInfo.location);
@@ -64,7 +79,7 @@ function Map({ userAddress, similarAddress }) {
               position={mapCenter}
               icon={userIcon}
               onClick={() =>
-                handleMarkerClick({ ...userInfo, title: userInfo.address, description: `Price: ${userInfo.price}` })
+                handleMarkerClick({ ...userInfo, addr: userInfo.address, price: `Price: ${userInfo.price}` })
               }
             />
             {similarInfo.map((simi, index) => (
@@ -72,16 +87,21 @@ function Map({ userAddress, similarAddress }) {
                 key={index}
                 position={simi.location}
                 icon={simiIcon}
-                onClick={() => handleMarkerClick({ ...simi, title: simi.address, description: `Price: ${simi.price}` })}
+                onClick={() => handleMarkerClick({ ...simi, addr: simi.address, price: `Price: ${simi.price}` })}
               />
             ))}
 
             {activeMarker && (
               <InfoWindowF position={activeMarker.location} onCloseClick={() => setActiveMarker(null)}>
                 <MDBCard>
-                  <MDBCardBody>
-                    <MDBCardTitle>{activeMarker.title}</MDBCardTitle>
-                    <p>{activeMarker.description}</p>
+                  <MDBCardBody style={{ padding: "0rem" }}>
+                    <MDBCardTitle>{activeMarker.price}</MDBCardTitle>
+                    <MDBCardText>{activeMarker.addr}</MDBCardText>
+                    {activeMarker.bed && (
+                      <MDBCardText>
+                        {activeMarker.bed}房{activeMarker.living}廳
+                      </MDBCardText>
+                    )}
                   </MDBCardBody>
                 </MDBCard>
               </InfoWindowF>

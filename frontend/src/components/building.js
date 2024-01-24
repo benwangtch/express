@@ -234,7 +234,13 @@ function Building() {
         </MDBCol>
       </MDBRow>
       <div className="d-grid gap-2 justify-content-md-end">
-        <MDBBtn type="submit" disabled={loading} style={{ width: "100px", height: "ˇ30px" }} color="dark">
+        <MDBBtn
+          type="submit"
+          disabled={loading}
+          style={{ width: "100px", height: "ˇ30px" }}
+          color="dark"
+          className="opacity-50"
+        >
           {loading ? (
             <>
               <MDBSpinner size="sm" role="status" tag="span" />

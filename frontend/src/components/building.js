@@ -129,10 +129,13 @@ function Building() {
 
       <h5>Filter</h5>
 
-      <div className="mb-4">
+      <MDBRow className="mb-4">
         <h6>House Age</h6>
+        <br />
         <Slider
-          className={"slider"}
+          className="slider"
+          trackClassName="slider-track"
+          thumbClassName="slider-thumb"
           value={filter_houseAgeRange}
           onChange={handleInputChangeSlider}
           min={0}
@@ -140,7 +143,8 @@ function Building() {
           step={1}
           renderThumb={Thumb}
         />
-      </div>
+      </MDBRow>
+      <br />
 
       <MDBRow className="mb-4">
         <MDBCol>

@@ -55,6 +55,13 @@ function House() {
     });
   };
 
+  const handleInputChangeSlider = (e) => {
+    setData({
+      ...data,
+      filter_houseAgeRange: e,
+    });
+  };
+
   // real submit
 
   const handleSubmit = async (e) => {
@@ -145,9 +152,8 @@ function House() {
         <h6>House Age</h6>
         <Slider
           className={"slider"}
-          name="filter_houseAgeRange"
           value={filter_houseAgeRange}
-          onChange={handleInputChange}
+          onChange={handleInputChangeSlider}
           min={0}
           max={100}
           step={1}

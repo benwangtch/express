@@ -50,6 +50,13 @@ function Building() {
     });
   };
 
+  const handleInputChangeSlider = (e) => {
+    setData({
+      ...data,
+      filter_houseAgeRange: e,
+    });
+  };
+
   // real submit
 
   // const handleSubmit = async (e) => {
@@ -72,26 +79,9 @@ function Building() {
   // };
 
   // test submit
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     console.log(data);
-
-    try {
-      setTimeout(() => {
-        const mockResponse = { data: "mock data" };
-        navigate("/result", {
-          state: {
-            responseData: mockResponse.data,
-          },
-          replace: true,
-        });
-        setLoading(false);
-      }, 5000);
-    } catch (error) {
-      console.error("Error:", error);
-      setLoading(false);
-    }
   };
 
   const Thumb = (props, state) => (
@@ -143,9 +133,8 @@ function Building() {
         <h6>House Age</h6>
         <Slider
           className={"slider"}
-          name="filter_houseAgeRange"
           value={filter_houseAgeRange}
-          onChange={handleInputChange}
+          onChange={handleInputChangeSlider}
           min={0}
           max={100}
           step={1}

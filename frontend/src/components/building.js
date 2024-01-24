@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBInput, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slider";
 import axios from "axios";
@@ -38,6 +38,8 @@ function Building() {
     filter_houseAgeRange,
   } = data;
 
+  const [loading, setLoading] = useState(false);
+
   let navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -48,23 +50,47 @@ function Building() {
     });
   };
 
-  // const handleChange = (newValue) => {
-  //   setHouseAgeRange(newValue);
+  // real submit
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   console.log(data);
+  //   try {
+  //     const response = await axios.post("/process", data);
+  //     navigate("/result", {
+  //       state: {
+  //         responseData: response.data,
+  //       },
+  //       replace: true,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error sending data:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
   // };
 
+  // test submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(data);
+
     try {
-      const response = await axios.post("/process", data);
-      navigate("/result", {
-        state: {
-          responseData: response.data,
-        },
-        replace: true,
-      });
+      setTimeout(() => {
+        const mockResponse = { data: "mock data" };
+        navigate("/result", {
+          state: {
+            responseData: mockResponse.data,
+          },
+          replace: true,
+        });
+        setLoading(false);
+      }, 5000);
     } catch (error) {
-      console.error("Error sending data:", error);
+      console.error("Error:", error);
+      setLoading(false);
     }
   };
 
@@ -207,10 +233,18 @@ function Building() {
           />
         </MDBCol>
       </MDBRow>
-
-      <MDBBtn type="submit" className="mb-4" block>
-        Submit
-      </MDBBtn>
+      <div className="d-grid gap-2 justify-content-md-end">
+        <MDBBtn type="submit" disabled={loading} style={{ width: "100px", height: "ˇ30px" }} color="dark">
+          {loading ? (
+            <>
+              <MDBSpinner size="sm" role="status" tag="span" />
+              <span className="visually-hidden">Loading...</span>
+            </>
+          ) : (
+            "Submit"
+          )}
+        </MDBBtn>
+      </div>
     </form>
   );
 }

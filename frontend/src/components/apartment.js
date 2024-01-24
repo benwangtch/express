@@ -41,6 +41,8 @@ function Apartment() {
     filter_n_c_1000,
   } = data;
 
+  const [loading, setLoading] = useState(false);
+
   let navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -51,8 +53,11 @@ function Apartment() {
     });
   };
 
+  // real submit
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(data);
     try {
       const response = await axios.post("/process", data);
@@ -64,6 +69,8 @@ function Apartment() {
       });
     } catch (error) {
       console.error("Error sending data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -215,9 +222,18 @@ function Apartment() {
         </MDBCol>
       </MDBRow>
 
-      <MDBBtn type="submit" className="mb-4" block>
-        Submit
-      </MDBBtn>
+      <div className="d-grid gap-2 justify-content-md-end">
+        <MDBBtn type="submit" disabled={loading} style={{ width: "100px", height: "ˇ30px" }} color="dark">
+          {loading ? (
+            <>
+              <MDBSpinner size="sm" role="status" tag="span" />
+              <span className="visually-hidden">Loading...</span>
+            </>
+          ) : (
+            "Submit"
+          )}
+        </MDBBtn>
+      </div>
     </form>
   );
 }

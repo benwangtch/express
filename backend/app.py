@@ -56,12 +56,20 @@ def process():
     output = inference(inputData["type"], inferenceData, inputData)
     # Get LatLon and addr for groupData to show on map
     groupData = getGroupLatLon(groupData, api)
+<<<<<<< HEAD
     groupData = convertGroupNumFeat(inputData["type"], groupData)
     groupData.to_csv("./groupData.csv", index=False)
     groupData = groupData.to_json()
 
     output = {"groupData": groupData, "output": output}
     print("Inference done.")
+=======
+    groupData = convertGroupNumFeat(inputData['type'], groupData)
+    groupData.to_csv('./groupData.csv', index=False)
+    groupData = groupData.to_json(orient='records')
+    output={'groupData':groupData,'output':output }
+    print('Inference done.')
+>>>>>>> 3e322c8d0659e943be9b076f1cff78d59143da91
     return output
 
 

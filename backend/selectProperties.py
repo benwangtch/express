@@ -36,12 +36,12 @@ def getSimilarProperties(inputData):
     
     if inputData['type'] == 'apartment':
         # Convert the features taken log while training
-        inputData['car'] = take_log(inputData['car'])
+        inputData['parkingArea'] = take_log(inputData['parkingArea'])
         groupByTotalFloor = []
-        groupByTotalFloor = selectByTotalFloor(groupByAge, groupNumList[2], inputData['floor'], groupByTotalFloor )
+        groupByTotalFloor = selectByTotalFloor(groupByAge, groupNumList[2], inputData['totalFloors'], groupByTotalFloor )
         
         groupByParking = []
-        groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['car'], groupByParking)
+        groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['parkingArea'], groupByParking)
         return groupByParking
     elif inputData['type'] == 'building':
         # Convert the features taken log while training
@@ -51,13 +51,13 @@ def getSimilarProperties(inputData):
         return groupByArea
     else:
         # Convert the features taken log while training
-        inputData['trans1'] = take_log(inputData['trans1'])
-        inputData['trans2'] = take_log(inputData['trans2'])
+        inputData['landTransferArea'] = take_log(inputData['landTransferArea'])
+        inputData['buildingTransferArea'] = take_log(inputData['buildingTransferArea'])
         groupByFar = []
-        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['far'], groupByFar)
+        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['floorAreaRatio'], groupByFar)
         
         groupByLandTransfer = []
-        groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['trans1'], groupByLandTransfer)
+        groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
         return groupByLandTransfer
         
 def take_log(x):

@@ -59,28 +59,9 @@ function Building() {
 
   // real submit
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   console.log(data);
-  //   try {
-  //     const response = await axios.post("/process", data);
-  //     navigate("/result", {
-  //       state: {
-  //         responseData: response.data,
-  //       },
-  //       replace: true,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error sending data:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // test submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(data);
     try {
       const response = await axios.post("/process", data);
@@ -97,6 +78,7 @@ function Building() {
     }
   };
 
+  
   // test submit
   // const handleSubmit = async (e) => {
   //   e.preventDefault();

@@ -131,7 +131,6 @@ function Apartment() {
           renderThumb={Thumb}
         />
       </div>
-
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput

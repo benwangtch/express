@@ -1,5 +1,5 @@
 import React, { useState, memo, useEffect } from "react";
-import { GoogleMap, useLoadScript, MarkerF, InfoWindowF, OverlayView } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { MDBCard, MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
 
 import userHouse from "../imgs/userHouse.svg";

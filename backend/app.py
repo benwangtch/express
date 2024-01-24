@@ -27,7 +27,7 @@ def test():
     return jsonify(data)
 
 
-@app.route('/process', methods=['POST'])
+@app.route("/process", methods=["POST"])
 def process():
     """The api used to get input from user, run all the algorithms and
     output the five similar data and prediction.
@@ -40,9 +40,9 @@ def process():
     """
     data = request.json
     inputData = data
-    
-    load_dotenv('../frontend/.env','REACT_APP_GOOGLE_MAPS_API_KEY')
-    api = os.getenv('REACT_APP_GOOGLE_MAPS_API_KEY')
+
+    load_dotenv("../frontend/.env", "REACT_APP_GOOGLE_MAPS_API_KEY")
+    api = os.getenv("REACT_APP_GOOGLE_MAPS_API_KEY")
     # Convert from TWD97 to LatLon
     inputData = getLatLong(inputData, api)
 
@@ -53,16 +53,17 @@ def process():
     # For Case study
     # outputInf = pd.DataFrame(inferenceData)
     # outputInf.to_csv('./inference_data.csv', index=False)
-    output = inference(inputData['type'], inferenceData, inputData)
+    output = inference(inputData["type"], inferenceData, inputData)
     # Get LatLon and addr for groupData to show on map
     groupData = getGroupLatLon(groupData, api)
-    groupData = convertGroupNumFeat(inputData['type'], groupData)
-    groupData.to_csv('./groupData.csv', index=False)
+    groupData = convertGroupNumFeat(inputData["type"], groupData)
+    groupData.to_csv("./groupData.csv", index=False)
     groupData = groupData.to_json()
-    
-    output={'groupData':groupData,'output':output }
-    print('Inference done.')
+
+    output = {"groupData": groupData, "output": output}
+    print("Inference done.")
     return output
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

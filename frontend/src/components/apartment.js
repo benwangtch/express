@@ -240,7 +240,7 @@ function Apartment() {
               <span className="visually-hidden">Loading...</span>
             </>
           ) : (
-            "Submit"
+            "Valuate"
           )}
         </MDBBtn>
       </div>

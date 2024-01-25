@@ -3,6 +3,9 @@ import pandas as pd
 import math 
 import numpy as np
 
+
+
+
 # Inputs: 
 # Building => addr, age, area
 # apartment => addr, age, total_floor, parking_area
@@ -59,7 +62,62 @@ def getSimilarProperties(inputData):
         groupByLandTransfer = []
         groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
         return groupByLandTransfer
-        
+def getFilterData(inputData):
+    """Get the most similar datas by parameter filtering, base on different property type input features.
+
+    Args:
+        inputData (json): The original inputData with converted coordinates for calculating the distances.
+
+    Returns:
+        DataFrame: Returns the most similar five data after filtering.
+    """
+    if inputData['type'] == 'apartment':
+        data = pd.read_csv('./data/all_apartment.csv')
+        filter_dict = {
+            'far': inputData['filter_floorAreaRatio'],
+            '主建物面積':  inputData['filter_mainBuildingArea'],
+            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
+            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
+            'population_density': inputData['filter_populationDensity'],
+            'total_floor': inputData['filter_totalFloors'],
+            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
+            'n_c_1000':  inputData['filter_n_c_1000'],
+            'house_age': inputData['filter_houseAgeRange'],
+        }
+    elif inputData['type'] == 'building':
+        data = pd.read_csv('./data/all_building.csv')
+        filter_dict = {
+            'far': inputData['filter_floorAreaRatio'],
+            '主建物面積':  inputData['filter_mainBuildingArea'],
+            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
+            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
+            'population_density': inputData['filter_populationDensity'],
+            'total_floor': inputData['filter_totalFloors'],
+            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
+            'n_c_1000':  inputData['filter_n_c_1000'],
+            'house_age': inputData['filter_houseAgeRange'],
+        }
+    else:
+        data = pd.read_csv('./data/all_house.csv')
+        filter_dict = {
+            'far': inputData['filter_floorAreaRatio'],
+            '主建物面積':  inputData['filter_mainBuildingArea'],
+            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
+            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
+            'population_density': inputData['filter_populationDensity'],
+            'total_floor': inputData['filter_totalFloors'],
+            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
+            'n_c_1000':  inputData['filter_n_c_1000'],
+            'house_age': inputData['filter_houseAgeRange'],
+        }
+    
+    filtered_data = data[
+    (data[filter_dict.keys()] >= pd.Series(filter_dict)[:, 0].values)
+    and (data[filter_dict.keys()] <= pd.Series(filter_dict)[:, 1].values)]
+    if filtered_data.shape[0]/10 <= 5:
+        return False
+    return filtered_data
+    
 def take_log(x):
     x = float(x)
     if x>0:

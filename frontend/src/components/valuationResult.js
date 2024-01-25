@@ -8,7 +8,7 @@ function ValuationResult({ userInfo }) {
   return (
     <MDBCard>
       <MDBCardBody>
-        <MDBCardTitle>ValuationResult</MDBCardTitle>
+        <MDBCardTitle>Valuation Result</MDBCardTitle>
         <MDBTable responsive className="rounded-border-table">
           <MDBTableHead light>
             <tr>

@@ -73,46 +73,50 @@ def getFilterData(inputData):
     """
     if inputData['type'] == 'apartment':
         data = pd.read_csv('./data/all_apartment.csv')
-        groupNumList = [30, 20, 10, 5]
+        filter_dict = {
+            'far': inputData['filter_floorAreaRatio'],
+            '主建物面積':  inputData['filter_mainBuildingArea'],
+            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
+            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
+            'population_density': inputData['filter_populationDensity'],
+            'total_floor': inputData['filter_totalFloors'],
+            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
+            'n_c_1000':  inputData['filter_n_c_1000'],
+            'house_age': inputData['filter_houseAgeRange'],
+        }
     elif inputData['type'] == 'building':
         data = pd.read_csv('./data/all_building.csv')
-        groupNumList = [20, 6, 5]
+        filter_dict = {
+            'far': inputData['filter_floorAreaRatio'],
+            '主建物面積':  inputData['filter_mainBuildingArea'],
+            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
+            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
+            'population_density': inputData['filter_populationDensity'],
+            'total_floor': inputData['filter_totalFloors'],
+            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
+            'n_c_1000':  inputData['filter_n_c_1000'],
+            'house_age': inputData['filter_houseAgeRange'],
+        }
     else:
         data = pd.read_csv('./data/all_house.csv')
-        groupNumList = [30, 20, 10, 5]
-        
-    # InputData will contain a Chinese address, need to be convert to (lat, long) either TWD97 or WGS84
-    groupByDist = []
-    groupByDist = selectByDist(data, groupNumList[0], [inputData['x座標'], inputData['y座標']], groupByDist)
+        filter_dict = {
+            'far': inputData['filter_floorAreaRatio'],
+            '主建物面積':  inputData['filter_mainBuildingArea'],
+            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
+            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
+            'population_density': inputData['filter_populationDensity'],
+            'total_floor': inputData['filter_totalFloors'],
+            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
+            'n_c_1000':  inputData['filter_n_c_1000'],
+            'house_age': inputData['filter_houseAgeRange'],
+        }
     
-    groupByAge = []
-    groupByAge = selectByAge(groupByDist, groupNumList[1], inputData['houseAge'], groupByAge)
-    
-    if inputData['type'] == 'apartment':
-        # Convert the features taken log while training
-        inputData['parkingArea'] = take_log(inputData['parkingArea'])
-        groupByTotalFloor = []
-        groupByTotalFloor = selectByTotalFloor(groupByAge, groupNumList[2], inputData['totalFloors'], groupByTotalFloor )
-        
-        groupByParking = []
-        groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['parkingArea'], groupByParking)
-        return groupByParking
-    elif inputData['type'] == 'building':
-        # Convert the features taken log while training
-        inputData['mainBuildingArea'] = take_log(inputData['mainBuildingArea'])
-        groupByArea = []
-        groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['mainBuildingArea'], groupByArea)
-        return groupByArea
-    else:
-        # Convert the features taken log while training
-        inputData['landTransferArea'] = take_log(inputData['landTransferArea'])
-        inputData['buildingTransferArea'] = take_log(inputData['buildingTransferArea'])
-        groupByFar = []
-        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['floorAreaRatio'], groupByFar)
-        
-        groupByLandTransfer = []
-        groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
-        return groupByLandTransfer
+    filtered_data = data[
+    (data[filter_dict.keys()] >= pd.Series(filter_dict)[:, 0].values)
+    and (data[filter_dict.keys()] <= pd.Series(filter_dict)[:, 1].values)]
+    if filtered_data.shape[0]/10 <= 5:
+        return False
+    return filtered_data
     
 def take_log(x):
     x = float(x)

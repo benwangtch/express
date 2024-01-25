@@ -165,7 +165,7 @@ function Building() {
           <h6>Building Transfer Area</h6>
           <CustomSlider
             value={filter_buildingTransferArea}
-            onChange={(value) => handleInputChangeSlider("filter_buldingTransferArea", value)}
+            onChange={(value) => handleInputChangeSlider("filter_buildingTransferArea", value)}
             min={0}
             max={100}
             step={1}

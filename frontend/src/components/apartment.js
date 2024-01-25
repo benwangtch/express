@@ -211,7 +211,7 @@ function Apartment() {
         </MDBCol>
       </MDBRow>
 
-      <MDBRow className="mb-5 col-6">
+      <MDBRow className="mb-5">
         <MDBCol>
           <h6>n_c_1000</h6>
           <CustomSlider
@@ -222,6 +222,7 @@ function Apartment() {
             step={1}
           />
         </MDBCol>
+        <MDBCol></MDBCol>
       </MDBRow>
 
       <div className="d-grid gap-2 justify-content-md-end">

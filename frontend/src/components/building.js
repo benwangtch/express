@@ -78,29 +78,6 @@ function Building() {
     }
   };
 
-  // test submit
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   console.log(data);
-
-  //   try {
-  //     setTimeout(() => {
-  //       const mockResponse = { data: "mock data" };
-  //       navigate("/result", {
-  //         state: {
-  //           responseData: mockResponse.data,
-  //         },
-  //         replace: true,
-  //       });
-  //       setLoading(false);
-  //     }, 5000);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     setLoading(false);
-  //   }
-  // };
-
   const Thumb = (props, state) => (
     <div
       {...props}
@@ -113,7 +90,7 @@ function Building() {
         alignItems: "center",
       }}
     >
-      <span style={{ fontSize: "12px" }}>{state.valueNow}</span>
+      <span style={{ fontSize: "12px", color: "white" }}>{state.valueNow}</span>
     </div>
   );
 
@@ -144,7 +121,7 @@ function Building() {
 
       <hr className="hr" />
 
-      <h5>Filter</h5>
+      <h5>Filter (Optional)</h5>
 
       <MDBRow className="mb-4">
         <h6>House Age</h6>
@@ -244,13 +221,7 @@ function Building() {
         </MDBCol>
       </MDBRow>
       <div className="d-grid gap-2 justify-content-md-end">
-        <MDBBtn
-          type="submit"
-          disabled={loading}
-          style={{ width: "100px", height: "ˇ30px" }}
-          color="dark"
-          className="opacity-50"
-        >
+        <MDBBtn type="submit" disabled={loading} style={{ width: "100px", height: "ˇ30px" }}>
           {loading ? (
             <>
               <MDBSpinner size="sm" role="status" tag="span" />

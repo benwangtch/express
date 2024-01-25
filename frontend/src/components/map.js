@@ -99,7 +99,7 @@ function Map({ userAddress, similarAddress }) {
                     <MDBCardText>{activeMarker.addr}</MDBCardText>
                     {activeMarker.bed && (
                       <MDBCardText>
-                        {activeMarker.bed}房{activeMarker.living}廳
+                        {activeMarker.bed}房 {activeMarker.living}廳
                       </MDBCardText>
                     )}
                   </MDBCardBody>

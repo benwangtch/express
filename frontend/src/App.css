@@ -1,34 +1,67 @@
 .slider {
-  max-width: 95%;
+  max-width: 100%;
   margin: auto;
 }
 
 .slider-track {
-  /* Top value to align your track to the center of your thumb */
   top: 8px;
-  /* thickness of the track */
   height: 4px;
- /* default color of your track */
   background: var(--track-color);
 }
 
 .slider-track-1 {
   /* color of the track before the thumb */
-  background: var(--main-color);
+  background: #1976D2;
 }
 
 .slider-thumb {
-  top: -3px;
   cursor: pointer;
-  /*color for the thumb */
-  background: var(--main-color);
-  /* shape of the thumb: circle */
+  background: #1976D2;
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  /* remove default outline when selected */
   outline: none;
-  
+}
+
+.slider-thumb-bubble {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #BBDEFB;
+  border: 1px solid #BBDEFB;
+  border-radius: 10px;
+  padding: 3px 6px;
+  font-size: 13px;
+  color: #0D47A1;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; 
+  visibility: hidden; 
+  width: 30px;
+  height: 30px;
+  transition: opacity 0.3s ease, visibility 0.3s ease; 
+  display: flex;
+}
+
+.slider-thumb-bubble:after {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: 51.5%;
+  transform: translateX(-50%) rotate(225deg);
+  width: 8px;
+  height: 8px;
+  background: #BBDEFB;
+  border-top: 1px solid #BBDEFB;
+  border-left: 1px solid #BBDEFB;
+}
+
+.slider-thumb:active .slider-thumb-bubble,
+.slider-thumb:hover .slider-thumb-bubble {
+  opacity: 1; 
+  visibility: visible; 
 }
 
 .slider-thumb:hover {
@@ -36,29 +69,17 @@
 }
 
 th:first-child {
-position: sticky;
-left: 0;
-z-index: 1;
-background-color: #8be792;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #8be792;
 }
 
 td:first-child {
-position: sticky;
-left: 0;
-z-index: 1;
-background-color: #8be792;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #8be792;
 }
 
-/* .spinner-border {
-  border-width: 0.6rem;
-  position: absolute;
-  top: 40%;
-  left: 45%;
-}  */
-
-/* .rounded-border-table {
-  border: 1px solid #ddd; 
-  border-radius: 15px; 
-  overflow: hidden; 
-} */
 

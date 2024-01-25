@@ -3,6 +3,9 @@ import pandas as pd
 import math 
 import numpy as np
 
+
+
+
 # Inputs: 
 # Building => addr, age, area
 # apartment => addr, age, total_floor, parking_area
@@ -59,7 +62,58 @@ def getSimilarProperties(inputData):
         groupByLandTransfer = []
         groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
         return groupByLandTransfer
+def getFilterData(inputData):
+    """Get the most similar datas by parameter filtering, base on different property type input features.
+
+    Args:
+        inputData (json): The original inputData with converted coordinates for calculating the distances.
+
+    Returns:
+        DataFrame: Returns the most similar five data after filtering.
+    """
+    if inputData['type'] == 'apartment':
+        data = pd.read_csv('./data/all_apartment.csv')
+        groupNumList = [30, 20, 10, 5]
+    elif inputData['type'] == 'building':
+        data = pd.read_csv('./data/all_building.csv')
+        groupNumList = [20, 6, 5]
+    else:
+        data = pd.read_csv('./data/all_house.csv')
+        groupNumList = [30, 20, 10, 5]
         
+    # InputData will contain a Chinese address, need to be convert to (lat, long) either TWD97 or WGS84
+    groupByDist = []
+    groupByDist = selectByDist(data, groupNumList[0], [inputData['x座標'], inputData['y座標']], groupByDist)
+    
+    groupByAge = []
+    groupByAge = selectByAge(groupByDist, groupNumList[1], inputData['houseAge'], groupByAge)
+    
+    if inputData['type'] == 'apartment':
+        # Convert the features taken log while training
+        inputData['parkingArea'] = take_log(inputData['parkingArea'])
+        groupByTotalFloor = []
+        groupByTotalFloor = selectByTotalFloor(groupByAge, groupNumList[2], inputData['totalFloors'], groupByTotalFloor )
+        
+        groupByParking = []
+        groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['parkingArea'], groupByParking)
+        return groupByParking
+    elif inputData['type'] == 'building':
+        # Convert the features taken log while training
+        inputData['mainBuildingArea'] = take_log(inputData['mainBuildingArea'])
+        groupByArea = []
+        groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['mainBuildingArea'], groupByArea)
+        return groupByArea
+    else:
+        # Convert the features taken log while training
+        inputData['landTransferArea'] = take_log(inputData['landTransferArea'])
+        inputData['buildingTransferArea'] = take_log(inputData['buildingTransferArea'])
+        groupByFar = []
+        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['floorAreaRatio'], groupByFar)
+        
+        groupByLandTransfer = []
+        groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
+        return groupByLandTransfer
+    
 def take_log(x):
     x = float(x)
     if x>0:

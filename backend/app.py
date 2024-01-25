@@ -47,9 +47,16 @@ def process():
     api = os.getenv("REACT_APP_GOOGLE_MAPS_API_KEY")
     # Convert from TWD97 to LatLon
     inputData = getLatLong(inputData, api)
-
-    groupData = selectByKNN(inputData)
-    # groupData = getSimilarProperties(inputData)
+    withFilterData = checkFilterData(inputData)
+    
+    if withFilterData:
+        print("Filter info for selectProperties")
+        groupData = getSimilarProperties(inputData)
+    else:
+        print("Target info for selectProperties")
+        groupData = getSimilarProperties(inputData)
+    # groupData = selectByKNN(inputData)
+    
     # For Case study
     groupData.to_csv('./similar_data_knn.csv', index=False)
     inferenceData = imputeMissingValues(inputData, groupData)

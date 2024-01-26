@@ -5,7 +5,25 @@ import numpy as np
 
 
 
-
+inputFilterFeat = ['filter_floorAreaRatio', 
+              'filter_mainBuildingArea', 
+              'filter_landTransferArea', 
+              'filter_buildingTransferArea', 
+              'filter_populationDensity', 
+              'filter_totalFloors', 
+              'filter_parkingArea', 
+              'filter_n_c_1000', 'filter_houseAgeRange']
+filterFeatTrueName ={
+    'filter_floorAreaRatio': 'far',
+    'filter_mainBuildingArea': '主建物面積',
+    'filter_landTransferArea': '土地移轉總面積(坪)',
+    'filter_buildingTransferArea': '建物移轉總面積(坪)',
+    'filter_populationDensity': 'population_density',
+    'filter_totalFloors': 'total_floor',
+    'filter_parkingArea': '車位移轉總面積(坪)',
+    'filter_n_c_1000': 'n_c_1000',
+    'filter_houseAgeRange': 'house_age'
+}
 # Inputs: 
 # Building => addr, age, area
 # apartment => addr, age, total_floor, parking_area
@@ -45,12 +63,14 @@ def getSimilarProperties(inputData):
         
         groupByParking = []
         groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['parkingArea'], groupByParking)
+        del data
         return groupByParking
     elif inputData['type'] == 'building':
         # Convert the features taken log while training
         inputData['mainBuildingArea'] = take_log(inputData['mainBuildingArea'])
         groupByArea = []
         groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['mainBuildingArea'], groupByArea)
+        del data
         return groupByArea
     else:
         # Convert the features taken log while training
@@ -61,7 +81,9 @@ def getSimilarProperties(inputData):
         
         groupByLandTransfer = []
         groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
+        del data
         return groupByLandTransfer
+
 def getFilterData(inputData):
     """Get the most similar datas by parameter filtering, base on different property type input features.
 
@@ -73,50 +95,34 @@ def getFilterData(inputData):
     """
     if inputData['type'] == 'apartment':
         data = pd.read_csv('./data/all_apartment.csv')
-        filter_dict = {
-            'far': inputData['filter_floorAreaRatio'],
-            '主建物面積':  inputData['filter_mainBuildingArea'],
-            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
-            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
-            'population_density': inputData['filter_populationDensity'],
-            'total_floor': inputData['filter_totalFloors'],
-            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
-            'n_c_1000':  inputData['filter_n_c_1000'],
-            'house_age': inputData['filter_houseAgeRange'],
-        }
+        filter_dict = {}
+        for key in inputFilterFeat:
+            if inputData[key] != [0,0]:
+                filter_dict[filterFeatTrueName[key]] = inputData[key]
+        
     elif inputData['type'] == 'building':
         data = pd.read_csv('./data/all_building.csv')
-        filter_dict = {
-            'far': inputData['filter_floorAreaRatio'],
-            '主建物面積':  inputData['filter_mainBuildingArea'],
-            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
-            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
-            'population_density': inputData['filter_populationDensity'],
-            'total_floor': inputData['filter_totalFloors'],
-            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
-            'n_c_1000':  inputData['filter_n_c_1000'],
-            'house_age': inputData['filter_houseAgeRange'],
-        }
+        filter_dict = {}
+        for key in inputFilterFeat:
+            if inputData[key] != [0,0]:
+                filter_dict[filterFeatTrueName[key]] = inputData[key]
+        
     else:
         data = pd.read_csv('./data/all_house.csv')
-        filter_dict = {
-            'far': inputData['filter_floorAreaRatio'],
-            '主建物面積':  inputData['filter_mainBuildingArea'],
-            '土地移轉總面積(坪)': inputData['filter_landTransferArea'],
-            '建物移轉總面積(坪)': inputData['filter_buildingTransferArea'],
-            'population_density': inputData['filter_populationDensity'],
-            'total_floor': inputData['filter_totalFloors'],
-            '車位移轉總面積(坪)': inputData['filter_parkingArea'],
-            'n_c_1000':  inputData['filter_n_c_1000'],
-            'house_age': inputData['filter_houseAgeRange'],
-        }
+        filter_dict = {}
+        for key in inputFilterFeat:
+            if inputData[key] != [0,0]:
+                filter_dict[filterFeatTrueName[key]] = inputData[key]
+        
     
     filtered_data = data[
-    (data[filter_dict.keys()] >= pd.Series(filter_dict)[:, 0].values)
-    and (data[filter_dict.keys()] <= pd.Series(filter_dict)[:, 1].values)]
+    (data[list(filter_dict.keys())].apply(lambda x: (x >= filter_dict[x.name][0]) & (x <= filter_dict[x.name][1])).all(axis=1))
+]
+    del data
     if filtered_data.shape[0] <= 50:
-        return False
-    return filtered_data
+        print("Not enough data for training KNN, using target info for selectProperties...")
+        return True, filtered_data, filter_dict
+    return False, filtered_data, filter_dict
     
 def take_log(x):
     x = float(x)

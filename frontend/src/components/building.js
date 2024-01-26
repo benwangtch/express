@@ -13,15 +13,15 @@ function Building() {
     address: "",
     houseAge: "",
     mainBuildingArea: "",
-    filter_floorAreaRatio: [0, 100],
-    filter_mainBuildingArea: [0, 100],
-    filter_landTransferArea: [0, 100],
-    filter_buildingTransferArea: [0, 100],
-    filter_populationDensity: [0, 100],
-    filter_totalFloors: [0, 100],
-    filter_parkingArea: [0, 100],
-    filter_n_c_1000: [0, 100],
-    filter_houseAgeRange: [0, 100],
+    filter_floorAreaRatio: [0, 0],
+    filter_mainBuildingArea: [0, 0],
+    filter_landTransferArea: [0, 0],
+    filter_buildingTransferArea: [0, 0],
+    filter_populationDensity: [0, 0],
+    filter_totalFloors: [0, 0],
+    filter_parkingArea: [0, 0],
+    filter_n_c_1000: [0, 0],
+    filter_houseAgeRange: [0, 0],
   });
 
   const {
@@ -86,7 +86,7 @@ function Building() {
   };
 
   return (
-    <form onSubmit={handleSubmitTest}>
+    <form onSubmit={handleSubmit}>
       <MDBInput
         className="mb-4"
         type="text"
@@ -116,7 +116,7 @@ function Building() {
 
       <MDBRow className="mb-5">
         <MDBCol>
-          <h6>House Age</h6>
+          <h6>House Age (Year)</h6>
           <CustomSlider
             value={filter_houseAgeRange}
             onChange={(value) => handleInputChangeSlider("filter_houseAgeRange", value)}
@@ -126,12 +126,12 @@ function Building() {
           />
         </MDBCol>
         <MDBCol>
-          <h6>Main Building Area</h6>
+          <h6>Main Building Area (Pin)</h6>
           <CustomSlider
             value={filter_mainBuildingArea}
             onChange={(value) => handleInputChangeSlider("filter_mainBuildingArea", value)}
             min={0}
-            max={100}
+            max={500}
             step={1}
           />
         </MDBCol>
@@ -139,22 +139,22 @@ function Building() {
 
       <MDBRow className="mb-5">
         <MDBCol>
-          <h6>Floor Area Ratio</h6>
+          <h6>Floor Area Ratio </h6>
           <CustomSlider
             value={filter_floorAreaRatio}
             onChange={(value) => handleInputChangeSlider("filter_floorAreaRatio", value)}
             min={0}
-            max={100}
+            max={20}
             step={1}
           />
         </MDBCol>
         <MDBCol>
-          <h6>Land Transfer Area</h6>
+          <h6>Land Transfer Area (Pin)</h6>
           <CustomSlider
             value={filter_landTransferArea}
             onChange={(value) => handleInputChangeSlider("filter_landTransferArea", value)}
             min={0}
-            max={100}
+            max={500}
             step={1}
           />
         </MDBCol>
@@ -162,12 +162,12 @@ function Building() {
 
       <MDBRow className="mb-5">
         <MDBCol>
-          <h6>Building Transfer Area</h6>
+          <h6>Building Transfer Area (Pin)</h6>
           <CustomSlider
             value={filter_buildingTransferArea}
             onChange={(value) => handleInputChangeSlider("filter_buildingTransferArea", value)}
             min={0}
-            max={100}
+            max={500}
             step={1}
           />
         </MDBCol>
@@ -195,7 +195,7 @@ function Building() {
           />
         </MDBCol>
         <MDBCol>
-          <h6>Parking Area</h6>
+          <h6>Parking Area (Pin)</h6>
           <CustomSlider
             value={filter_parkingArea}
             onChange={(value) => handleInputChangeSlider("filter_parkingArea", value)}
@@ -208,12 +208,12 @@ function Building() {
 
       <MDBRow className="mb-5">
         <MDBCol>
-          <h6>n_c_1000</h6>
+          <h6># NIMBY Facility within 1000m</h6>
           <CustomSlider
             value={filter_n_c_1000}
             onChange={(value) => handleInputChangeSlider("filter_n_c_1000", value)}
             min={0}
-            max={100}
+            max={200}
             step={1}
           />
         </MDBCol>

@@ -11,7 +11,7 @@ def take_log(x):
         return math.log(x)
     else:
         return 0.  
-def selectByKNN(inputData):
+def selectByKNN(selectNum,inputData, filter_dict, knnTrainData):
     """Get the most similar datas by parameter filtering, base on different property type input features.
 
     Args:
@@ -21,7 +21,7 @@ def selectByKNN(inputData):
         DataFrame: Returns the most similar five data after filtering.
     """
     if inputData['type'] == 'apartment':
-        data = pd.read_csv('./data/all_apartment.csv')
+        data = knnTrainData
         anchor = {
                 'x座標': [inputData['x座標']],
                 'y座標': [inputData['y座標']],
@@ -30,9 +30,11 @@ def selectByKNN(inputData):
                 '車位移轉總面積(坪)': [take_log(inputData['parkingArea'])]
             }
         X_input = pd.DataFrame(anchor, columns = apartment_col)
-        with open('./model/knn_apartment.pkl', 'rb') as f:
-            knn_selector = pickle.load(f)
-         
+        knn_selector = NearestNeighbors(n_neighbors=selectNum)
+        
+        selected_df = data.loc[:, apartment_col]
+        knn_selector.fit(selected_df)
+        
     elif inputData['type'] == 'building':
         data = pd.read_csv('./data/all_building.csv')
         anchor = {
@@ -42,8 +44,11 @@ def selectByKNN(inputData):
                 'house_age': [inputData['houseAge']]
             }
         X_input = pd.DataFrame(anchor, columns = building_col)
-        with open('./model/knn_building.pkl', 'rb') as f:
-            knn_selector = pickle.load(f)
+        knn_selector = NearestNeighbors(n_neighbors=selectNum)
+        
+        selected_df = data.loc[:, building_col]
+        knn_selector.fit(selected_df)
+        
     else:
         data = pd.read_csv('./data/all_house.csv')
         anchor = {
@@ -55,10 +60,11 @@ def selectByKNN(inputData):
                 'far': [inputData['floorAreaRatio']]
             }
         X_input = pd.DataFrame(anchor, columns = house_col)
+        knn_selector = NearestNeighbors(n_neighbors=selectNum)
         
-        with open('./model/knn_house.pkl', 'rb') as f:
-            knn_selector = pickle.load(f)
+        selected_df = data.loc[:, house_col]
+        knn_selector.fit(selected_df)
         
     _, indices = knn_selector.kneighbors(X_input)
-    most_similar_data = data.iloc[indices[0]]
-    return most_similar_data
+    KNNGroupData = data.iloc[indices[0]]
+    return KNNGroupData

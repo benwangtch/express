@@ -114,7 +114,7 @@ def getFilterData(inputData):
     filtered_data = data[
     (data[filter_dict.keys()] >= pd.Series(filter_dict)[:, 0].values)
     and (data[filter_dict.keys()] <= pd.Series(filter_dict)[:, 1].values)]
-    if filtered_data.shape[0]/10 <= 5:
+    if filtered_data.shape[0] <= 50:
         return False
     return filtered_data
     

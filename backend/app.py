@@ -51,7 +51,11 @@ def process():
     
     if withFilterData:
         print("Filter info for selectProperties")
-        groupData = getSimilarProperties(inputData)
+        knnData = getFilterData(inputData)
+        if not knnData:
+            print("Not enough data for knn, target info for selectProperties")
+            groupData = getSimilarProperties(inputData)
+        
     else:
         print("Target info for selectProperties")
         groupData = getSimilarProperties(inputData)

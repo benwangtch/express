@@ -72,14 +72,14 @@ th:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
-  background-color: #6acae8;
+  background-color: #BBDEFB;
 }
 
 td:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
-  background-color: #6acae8;
+  background-color: #BBDEFB;
 }
 
 

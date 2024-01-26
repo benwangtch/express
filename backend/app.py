@@ -45,12 +45,12 @@ def process():
 
     load_dotenv("../frontend/.env", "REACT_APP_GOOGLE_MAPS_API_KEY")
     api = os.getenv("REACT_APP_GOOGLE_MAPS_API_KEY")
-    # Convert from TWD97 to LatLon
-    inputData = getLatLong(inputData, api)
     
     #Check if filter info is input
     withFilterData = checkFilterData(inputData)
-
+    # Convert from TWD97 to LatLon
+    inputData = getLatLong(inputData, api)
+    
     # If filter info is input, use the filter info to filter the data,
     # Otherwise, use the target info to select the properties(old version)
     if withFilterData:

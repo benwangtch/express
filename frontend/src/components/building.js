@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { MDBInput, MDBRow, MDBCol, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import Slider from "react-slider";
 import axios from "axios";
+
+import CustomSlider from "./customSlider";
 // var buildingRenderFeatures = ['price_pin','addr', 'house_age','主建物面積','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density','total_floor', '車位移轉總面積(坪)', 'n_c_1000']
 // var buildingRenderFeaturesEng  = ['Unit Price', 'Address', 'House Age','Main Building Area','Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area','Population Density','Total Floor', 'Parking Area','n_c_1000']
 
@@ -12,14 +13,14 @@ function Building() {
     address: "",
     houseAge: "",
     mainBuildingArea: "",
-    filter_floorAreaRatio: "",
-    filter_mainBuildingArea: "",
-    filter_landTransferArea: "",
-    filter_buildingTransferArea: "",
-    filter_populationDensity: "",
-    filter_totalFloors: "",
-    filter_parkingArea: "",
-    filter_n_c_1000: "",
+    filter_floorAreaRatio: [0, 100],
+    filter_mainBuildingArea: [0, 100],
+    filter_landTransferArea: [0, 100],
+    filter_buildingTransferArea: [0, 100],
+    filter_populationDensity: [0, 100],
+    filter_totalFloors: [0, 100],
+    filter_parkingArea: [0, 100],
+    filter_n_c_1000: [0, 100],
     filter_houseAgeRange: [0, 100],
   });
 
@@ -50,10 +51,10 @@ function Building() {
     });
   };
 
-  const handleInputChangeSlider = (e) => {
+  const handleInputChangeSlider = (name, value) => {
     setData({
       ...data,
-      filter_houseAgeRange: e,
+      [name]: value,
     });
   };
 
@@ -78,24 +79,14 @@ function Building() {
     }
   };
 
-  const Thumb = (props, state) => (
-    <div
-      {...props}
-      style={{
-        ...props.style,
-        height: "25px",
-        width: "25px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <span style={{ fontSize: "12px", color: "white" }}>{state.valueNow}</span>
-    </div>
-  );
+  // test submit
+  const handleSubmitTest = async (e) => {
+    e.preventDefault();
+    console.log(data);
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitTest}>
       <MDBInput
         className="mb-4"
         type="text"
@@ -121,105 +112,114 @@ function Building() {
 
       <hr className="hr" />
 
-      <h5>Filter (Optional)</h5>
+      <h4>Filter</h4>
 
-      <MDBRow className="mb-4">
-        <h6>House Age</h6>
-        <br />
-        <Slider
-          className="slider"
-          trackClassName="slider-track"
-          thumbClassName="slider-thumb"
-          value={filter_houseAgeRange}
-          onChange={handleInputChangeSlider}
-          min={0}
-          max={100}
-          step={1}
-          renderThumb={Thumb}
-        />
-      </MDBRow>
-      <br />
-
-      <MDBRow className="mb-4">
+      <MDBRow className="mb-5">
         <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_mainBuildingArea"
-            label="Main Building Area"
+          <h6>House Age</h6>
+          <CustomSlider
+            value={filter_houseAgeRange}
+            onChange={(value) => handleInputChangeSlider("filter_houseAgeRange", value)}
+            min={0}
+            max={100}
+            step={1}
+          />
+        </MDBCol>
+        <MDBCol>
+          <h6>Main Building Area</h6>
+          <CustomSlider
             value={filter_mainBuildingArea}
-            onChange={handleInputChange}
+            onChange={(value) => handleInputChangeSlider("filter_mainBuildingArea", value)}
+            min={0}
+            max={100}
+            step={1}
           />
         </MDBCol>
+      </MDBRow>
+
+      <MDBRow className="mb-5">
         <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_floorAreaRatio"
-            label="Floor Area Ratio"
+          <h6>Floor Area Ratio</h6>
+          <CustomSlider
             value={filter_floorAreaRatio}
-            onChange={handleInputChange}
+            onChange={(value) => handleInputChangeSlider("filter_floorAreaRatio", value)}
+            min={0}
+            max={100}
+            step={1}
           />
         </MDBCol>
-      </MDBRow>
-
-      <MDBRow className="mb-4">
         <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_landTransferArea"
-            label="Land Transfer Area"
+          <h6>Land Transfer Area</h6>
+          <CustomSlider
             value={filter_landTransferArea}
-            onChange={handleInputChange}
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_buildingTransferArea"
-            label="Building Transfer Area"
-            onChange={handleInputChange}
-            value={filter_buildingTransferArea}
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_populationDensity"
-            label="Population Density"
-            onChange={handleInputChange}
-            value={filter_populationDensity}
+            onChange={(value) => handleInputChangeSlider("filter_landTransferArea", value)}
+            min={0}
+            max={100}
+            step={1}
           />
         </MDBCol>
       </MDBRow>
 
-      <MDBRow className="mb-4">
+      <MDBRow className="mb-5">
         <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_totalFloors"
-            label="Total Floor"
-            onChange={handleInputChange}
-            value={filter_totalFloors}
+          <h6>Building Transfer Area</h6>
+          <CustomSlider
+            value={filter_buildingTransferArea}
+            onChange={(value) => handleInputChangeSlider("filter_buildingTransferArea", value)}
+            min={0}
+            max={100}
+            step={1}
           />
         </MDBCol>
         <MDBCol>
-          <MDBInput
-            type="number"
-            label="Parking Area"
-            name="filter_parkingArea"
-            onChange={handleInputChange}
-            value={filter_parkingArea}
-          />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            type="number"
-            name="filter_n_c_1000"
-            label="n_c_1000"
-            value={filter_n_c_1000}
-            onChange={handleInputChange}
+          <h6>Population Density</h6>
+          <CustomSlider
+            value={filter_populationDensity}
+            onChange={(value) => handleInputChangeSlider("filter_populationDensity", value)}
+            min={0}
+            max={100}
+            step={1}
           />
         </MDBCol>
       </MDBRow>
+
+      <MDBRow className="mb-5">
+        <MDBCol>
+          <h6>Total Floor</h6>
+          <CustomSlider
+            value={filter_totalFloors}
+            onChange={(value) => handleInputChangeSlider("filter_totalFloors", value)}
+            min={0}
+            max={100}
+            step={1}
+          />
+        </MDBCol>
+        <MDBCol>
+          <h6>Parking Area</h6>
+          <CustomSlider
+            value={filter_parkingArea}
+            onChange={(value) => handleInputChangeSlider("filter_parkingArea", value)}
+            min={0}
+            max={100}
+            step={1}
+          />
+        </MDBCol>
+      </MDBRow>
+
+      <MDBRow className="mb-5">
+        <MDBCol>
+          <h6>n_c_1000</h6>
+          <CustomSlider
+            value={filter_n_c_1000}
+            onChange={(value) => handleInputChangeSlider("filter_n_c_1000", value)}
+            min={0}
+            max={100}
+            step={1}
+          />
+        </MDBCol>
+        <MDBCol></MDBCol>
+      </MDBRow>
+
       <div className="d-grid gap-2 justify-content-md-end">
         <MDBBtn type="submit" disabled={loading} style={{ width: "100px", height: "ˇ30px" }}>
           {loading ? (

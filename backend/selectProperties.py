@@ -64,14 +64,14 @@ def getSimilarProperties(inputData):
         groupByParking = []
         groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['parkingArea'], groupByParking)
         del data
-        return groupByParking
+        return inputData, groupByParking
     elif inputData['type'] == 'building':
         # Convert the features taken log while training
         inputData['mainBuildingArea'] = take_log(inputData['mainBuildingArea'])
         groupByArea = []
         groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['mainBuildingArea'], groupByArea)
         del data
-        return groupByArea
+        return inputData, groupByArea
     else:
         # Convert the features taken log while training
         inputData['landTransferArea'] = take_log(inputData['landTransferArea'])
@@ -82,7 +82,7 @@ def getSimilarProperties(inputData):
         groupByLandTransfer = []
         groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['landTransferArea'], groupByLandTransfer)
         del data
-        return groupByLandTransfer
+        return inputData, groupByLandTransfer
 
 def getFilterData(inputData):
     """Get the most similar datas by parameter filtering, base on different property type input features.

@@ -117,7 +117,6 @@ function Apartment() {
 
       <hr className="hr" />
 
-      <h4>Filter</h4>
 
       <h4>Filter</h4>
 

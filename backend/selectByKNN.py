@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import pickle
 import math
+import random
+import numpy as np
 apartment_col = ['x座標', 'y座標', 'total_floor', 'house_age', '車位移轉總面積(坪)']
 house_col = ['x座標', 'y座標', 'house_age', '土地移轉總面積(坪)', '建物移轉總面積(坪)','far']
 building_col = ['x座標', 'y座標', '主建物面積', 'house_age']
@@ -29,6 +31,7 @@ def selectByKNN(selectNum,inputData, filter_dict, knnTrainData):
                 'house_age': [inputData['houseAge']],
                 '車位移轉總面積(坪)': [take_log(inputData['parkingArea'])]
             }
+        inputData['parkingArea']=take_log(inputData['parkingArea'])
         X_input = pd.DataFrame(anchor, columns = apartment_col)
         knn_selector = NearestNeighbors(n_neighbors=selectNum)
         
@@ -36,13 +39,14 @@ def selectByKNN(selectNum,inputData, filter_dict, knnTrainData):
         knn_selector.fit(selected_df)
         
     elif inputData['type'] == 'building':
-        data = pd.read_csv('./data/all_building.csv')
+        data = knnTrainData
         anchor = {
                 'x座標': [inputData['x座標']],
                 'y座標': [inputData['y座標']],
                 '主建物面積': [take_log(inputData['mainBuildingArea'])],
                 'house_age': [inputData['houseAge']]
             }
+        inputData['mainBuildingArea']=take_log(inputData['mainBuildingArea'])
         X_input = pd.DataFrame(anchor, columns = building_col)
         knn_selector = NearestNeighbors(n_neighbors=selectNum)
         
@@ -50,7 +54,7 @@ def selectByKNN(selectNum,inputData, filter_dict, knnTrainData):
         knn_selector.fit(selected_df)
         
     else:
-        data = pd.read_csv('./data/all_house.csv')
+        data = knnTrainData
         anchor = {
                 'x座標': [inputData['x座標']],
                 'y座標': [inputData['y座標']],
@@ -59,6 +63,8 @@ def selectByKNN(selectNum,inputData, filter_dict, knnTrainData):
                 '建物移轉總面積(坪)': [take_log(inputData['buildingTransferArea'])],
                 'far': [inputData['floorAreaRatio']]
             }
+        inputData['landTransferArea']=take_log(inputData['landTransferArea'])
+        inputData['buildingTransferArea']=take_log(inputData['buildingTransferArea'])
         X_input = pd.DataFrame(anchor, columns = house_col)
         knn_selector = NearestNeighbors(n_neighbors=selectNum)
         
@@ -67,4 +73,6 @@ def selectByKNN(selectNum,inputData, filter_dict, knnTrainData):
         
     _, indices = knn_selector.kneighbors(X_input)
     KNNGroupData = data.iloc[indices[0]]
-    return KNNGroupData
+    return inputData, KNNGroupData
+
+    

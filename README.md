@@ -1,12 +1,17 @@
 # EXPRESS: A Model-Agnostic Explainable Property Valuation System with Neighbor Imputation.
-System screenshot after valuation.<br/>
+System screenshot of input page.<br/>
 
 ![Image](/assests/express.png "Interface of EXPRESS")
+
+System screenshot after valuation.<br/>
+
+![Image](/assests/results.png "Interface of EXPRESS")
 
 ## Directory Structure
 ``` Bash
 .
 ├── assests
+│   ├── steps.svg
 │   └── express.png
 ├── backend
 │   ├── app.py

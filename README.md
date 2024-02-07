@@ -73,24 +73,19 @@ System screenshot after valuation.<br/>
 └── README.md
 ```
 
-## Installation
-Recommand conda for setting up the environment, with other applications, the versions of the packages is shown in 'requirements.txt'.
-```
-    conda create --name <env> --file requirements.txt
-```
-We used the service, geocoding, which is provided by Google. So for running the system, you will need to apply for a api key from the site below, then put your **api key** in file `./frontend/.env` as REACT_APP_GOOGLE_MAPS_API_KEY='API_KEY'.
-
 ## Confidential Data Issue
 Due to the confidential issue of our house data, the house data if directory './backend/data' can't be provided.
 
+## Demonstration video
+[Demo video](https://youtu.be/1YsPrxYtmLk "@embed") is provided for a clear understanding of how the system works.
+
 ## Demonstration
 The screenshots below shows the four steps of our system,<br />
-1. Select the property type.
-2. Enter property details.
-3. Set the property configuration.
-4. Get the valuation result.
-5. Verify the result with pairwise explanation and the location relationship shown on map.
-![Image](/assests/images/steps.png "Steps of EXPRESS")<br />
+1. Select the property type and enter property details.
+2. Set the property configuration.
+3. Get the valuation result.
+4. Verify the result with pairwise explanation and the location relationship shown on map.
+![Image](/assests/steps.svg "Steps of EXPRESS")<br />
 
 
 

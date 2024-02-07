@@ -50,7 +50,7 @@ def process():
             inputData, groupData = getSimilarProperties(inputData)
         else:
             # The neighbor number is 1/10 of the training data (TODO: need to be tuned)
-            similarNum = int(knnTrainData.shape[0]/10)
+            similarNum = int(knnTrainData.shape[0])
             print("Original similarNum: ", similarNum)
             similarNum = min(similarNum, 20)
             print("Adjusted similarNum: ", similarNum)

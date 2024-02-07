@@ -17,7 +17,7 @@ export default function App() {
   return (
     <MDBNavbar expand="lg" light bgColor="light" className="rounded-pill">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="/">Property Valuation System</MDBNavbarBrand>
+        <MDBNavbarBrand href="/">EXPRESS</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"

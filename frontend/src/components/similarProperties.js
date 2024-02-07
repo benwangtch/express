@@ -9,7 +9,7 @@ function SimilarProperties({ userInfo, similarInfo }) {
   return (
     <MDBCard>
       <MDBCardBody>
-        <MDBCardTitle>Similar Properties</MDBCardTitle>
+        <MDBCardTitle>Pairwise Explaination</MDBCardTitle>
         <MDBTable responsive className="rounded-border-table">
           <MDBTableHead light>
             <tr>

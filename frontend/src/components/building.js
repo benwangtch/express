@@ -112,7 +112,7 @@ function Building() {
 
       <hr className="hr" />
 
-      <h4>Filter</h4>
+      <h4>Property Configuration</h4>
 
       <MDBRow className="mb-5">
         <MDBCol>

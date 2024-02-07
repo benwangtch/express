@@ -1,4 +1,7 @@
 # EXPRESS: A Model-Agnostic Explainable Property Valuation System with Neighbor Imputation.
+Our system is an Explainable Property Valuation System called EXPRESS, which can be used by banks and financial institutions that make loans for house buyers, property buyers or sellers who plan to buy or sell properties.
+
+
 System screenshot of input page.<br/>
 
 ![Image](/assests/express.png "Interface of EXPRESS")
@@ -80,6 +83,14 @@ System screenshot after valuation.<br/>
 
 ## Confidential Data Issue
 Due to the confidential issue of our house data, the house data if directory './backend/data' can't be provided.
+
+## Install and Usage
+Due to the cost of Geoencoding API provided by Google might be high, and also with the confidential issue mentioned above, we can only provide direct usage of our frontend. Run the command below for the frontend interface usage.
+```
+    cd frontend
+    npm install
+    npm start
+```
 
 ## Demonstration video
 [Demo video](https://youtu.be/1YsPrxYtmLk "@embed") is provided for a clear understanding of how the system works.

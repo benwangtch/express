@@ -100,7 +100,7 @@ The screenshots below shows the four steps of our system,<br />
 1. Select the property type and enter property details.
 2. Set the property configuration.
 3. Get the valuation result.
-4. Verify the result with pairwise explanation and the location relationship shown on map.
+4. Verify the result with LLM-generated explanation and the location relationship shown on map.
 ![Image](/assests/repo.png "Steps of EXPRESS")<br />
 
 
